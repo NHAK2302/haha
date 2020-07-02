@@ -1,4 +1,5 @@
 #include<iostream>
+#define fUSER "user.csv"
 using namespace std;
 void main()
 {
