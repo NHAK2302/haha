@@ -9,8 +9,9 @@ void main()
 	cout << "test" << endl;
 	//debug login function
 	FILE* f = fopen(fUSER,"r+t");
-	int ord;
-	char name[LENGTH_MAX] = "tonyvu1288\0";
-	ord = findUser(name, f);
-	printf("%d\n", ord);
+	User a;
+	int log = loginUser(a, f);
+	cout << log<<endl;
+	logoutUser(a, log);
+	cout << log << endl;
 }

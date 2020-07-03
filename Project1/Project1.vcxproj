@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Date.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="DynamicCString.cpp" />
