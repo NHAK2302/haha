@@ -1,0 +1,3 @@
+﻿  Source.cpp
+E:\Do an cuoi ki\haha\Project1\Source.cpp(6,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Project1.vcxproj -> E:\Do an cuoi ki\haha\Debug\Project1.exe
