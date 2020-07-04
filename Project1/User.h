@@ -8,6 +8,7 @@ struct User {
 	Date birth;
 	int sex; // male = 1, female = 0
 	int status; //lock = 1,activate = 2,admin = 3
+	int type;
 };
 
 

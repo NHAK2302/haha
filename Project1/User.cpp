@@ -78,7 +78,7 @@ int checkpassUser(int ord,char* pass, FILE* f) //chua xong
 	}
 	rewind(f);
 	char trash[LENGTH_MAX];
-	int n;
+	int n, status;
 	char pass_legit[LENGTH_MAX];
 	fscanf(f,"%d\n", &n);
 	// di den line ord
@@ -86,9 +86,14 @@ int checkpassUser(int ord,char* pass, FILE* f) //chua xong
 	{
 		fscanf(f, "%[^\n]\n", trash);
 	}
-	fscanf(f, "%[^,],%[^,],%[^,],", &trash, &trash, &pass_legit);
+	fscanf(f, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],", &trash, &trash, &pass_legit, &trash, &trash, &trash, &trash, &trash, &status);
 	if (strcmp(pass_legit, pass) == 0)
 	{
+		if (status == 0) {
+			printf("This account is already blocked\n");
+			rewind(f);
+			return 0;
+		}
 		rewind(f);
 		return 1;
 	}
@@ -124,6 +129,6 @@ void readUser(User& u,int ord, FILE* f)
 	copyString_statictodynamic(temp, u.address);
 	fscanf(f, "%[^,],", &temp);
 	u.birth=convertStringtoDate(temp);
-	fscanf(f, "%d,%d\n", &u.sex,&u.status);
+	fscanf(f, "%d,%d,%d\n", &u.sex,&u.status,&u.type);
 	rewind(f);
 }
