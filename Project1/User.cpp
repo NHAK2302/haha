@@ -8,7 +8,7 @@ int loginUser(User& u,FILE* f) //tra ve ti`nh trang log
 	scanf("%s", &temp_string);
 	if ((ord = findUser(temp_string, f)) < 0)
 	{
-		printf("Tai khoan khong ton tai !\n");
+		printf("Tai khoan khong ton tai!\n");
 		rewind(f);
 		return 0;
 	}
@@ -33,7 +33,7 @@ int loginUser(User& u,FILE* f) //tra ve ti`nh trang log
 	readUser(u, ord, f);
 	if (u.status == 0)
 	{
-		printf("Tai khoan cua ban da bi khoa ! Vui long dang nhap lai bang tai khoan khac! \n");
+		printf("Tai khoan cua ban da bi khoa! Vui long dang nhap lai bang tai khoan khac! \n");
 		return 0;
 	}
 	printf("Dang nhap thanh cong ! \n");
@@ -132,7 +132,7 @@ void readUser(User& u,int ord, FILE* f)
 	fscanf(f, "%d,%d,%d", &u.sex,&u.status,&u.type);
 	rewind(f);
 }
-void writeUser(User& u, FILE* f)
+void writeUser(User& u, FILE*& f)
 {
 	if (f == NULL)
 	{
@@ -176,31 +176,52 @@ void writeUser(User& u, FILE* f)
 	fclose(temp_f);
 	remove(fUSER);
 	rename("temp.txt", fUSER);
+	f = fopen(fUSER, "w+t");
 }
 
-void updateUserInfo(User& u, FILE* f) {
+void updateUserInfo(User& u, int ord, FILE* f) {
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
 		return;
 	}
 	rewind(f);
+	
 	int choice;
 	do {
 		printf("Nhung thong tin co the duoc cap nhat\n");
-		printf("1. Ho ten\n");
-		printf("2. Ngay sinh\n");
-		printf("3. CMND\n");
-		printf("4. Dia chi\n");
-		printf("5. Gioi tinh\n");
-		printf("6. Tinh trang\n");
+		printf("1. Ho ten        : %s\n",u.name);
+		printf("2. Ngay sinh     : %d/%d/%d\n",u.birth.d,u.birth.m,u.birth.y);
+		printf("3. CMND          : %s\n",u.identify_numb);
+		printf("4. Dia chi       : %s\n",u.address);
+		printf("5. Gioi tinh     : ");
+		if (u.sex) {
+			printf("Nam\n");
+		}
+		else {
+			printf("Nu\n");
+		}
+		printf("6. Tinh trang    : ");
+		if (u.status) {
+			printf("Activated\n");
+		}
+		else {
+			printf("Blocked\n");
+		}
 		printf("0. Quay lai\n");
-		printf("======================\n\n");
+		printf("============================================================\n\n");
 		printf(" >> Chon thong tin ban muon cap nhat: ");
-		scanf_s("%d", &choice);
+		scanf("%d", &choice);
 		switch (choice) {
 		case 1: {
-
+			char temp_string[LENGTH_MAX];
+			printf("Nhap ho ten moi: ");
+			std::cin.ignore();
+			fgets(temp_string, sizeof(temp_string), stdin);
+			fflush(stdin);
+			strcpy(u.name, temp_string);
+			writeUser(u, f);
+			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
 		}
