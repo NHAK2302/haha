@@ -1,0 +1,3 @@
+Chức năng 1 coi như đã xong, chỉ còn bug vặt.
+Chức năng 2,3,4 có thể sao chép ý tưởng của chức năng 1.
+Hàm updatePass, giveStatus ( đổi mật khẩu và phân quyền) tạm thời chưa xong.

@@ -330,9 +330,10 @@ void updatePass(User& u, FILE* f) { //con 1 ty bug
 	writeUser(u, f);
 	printf("Da thay doi mat khau thanh cong!\n");
 	rewind(f);
-}
+} 
+//chua xong
 
-void giveStatus(User& u, FILE* f) {
+void giveUser_status(User& u, FILE* f) {
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -351,4 +352,5 @@ void giveStatus(User& u, FILE* f) {
 	scanf("%d", &u.status);
 	writeUser(u, f);
 	rewind(f);
-}
+} 
+// chua debug
