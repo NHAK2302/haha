@@ -9,6 +9,18 @@ void func1(FILE* f) {
 	do {
 		system("cls");
 		printf("===========================================================================\n");
+
+		printf("===========================================================================\n");
+		printf("Chuc nang 1: ...\n");
+		printf("===========================================================================\n");
+		printf("1. Dang nhap\n");
+		printf("2. Dang xuat\n");
+		printf("3. Thay doi mat khau\n");
+		printf("4. Cap nhat thong tin ca nhan\n");
+		printf("5. Tao nguoi dung\n");
+		printf("6. Phan quyen nguoi dung\n");
+		printf("0. Quay lai\n");
+		printf("===========================================================================\n");
 		if (login == 0)
 		{
 			printf("Tinh trang : Chua dang nhap\n");
@@ -39,18 +51,8 @@ void func1(FILE* f) {
 				break;
 			}
 		}
-		printf("===========================================================================\n");
-		printf("Chuc nang 1: ...\n");
-		printf("===========================================================================\n");
-		printf("1. Dang nhap\n");
-		printf("2. Dang xuat\n");
-		printf("3. Thay doi mat khau\n");
-		printf("4. Cap nhat thong tin ca nhan\n");
-		printf("5. Tao nguoi dung\n");
-		printf("6. Phan quyen nguoi dung\n");
-		printf("0. Quay lai\n");
-		printf("===========================================================================\n");
-		printf("Ban chon chuc nang: ");
+		printf("===========================================================================\n\n\n");
+		printf("> Ban chon chuc nang: ");
 		scanf_s("%d", &smallFunc);
 
 		switch (smallFunc) {
@@ -129,7 +131,38 @@ void welcome(FILE* f) {
 		printf("Chuc nang 6: Cac thong ke co ban\n");
 		printf("Chuc nang 0: Thoat chuong trinh\n");
 		printf("===========================================================================\n");
-		printf("Ban chon chuc nang: ");
+		if (login == 0)
+		{
+			printf("Tinh trang : Chua dang nhap\n");
+		}
+		else
+		{
+			printf("Tinh trang : Da dang nhap\n");
+			printf("Xin chao, %s \n", u.name);
+			printf("Tham quyen tai khoan cua ban la : ");
+			switch (u.type)
+			{
+			case 1:
+			{
+				printf("Chuyen vien \n");
+				break;
+			}
+			case 2:
+			{
+				printf("Quan ly \n");
+				break;
+			}
+			case 3:
+			{
+				printf("Admin \n");
+				break;
+			}
+			default:
+				break;
+			}
+		}
+		printf("===========================================================================\n\n\n");
+		printf("> Ban chon chuc nang: ");
 		scanf_s("%d", &func);
 
 		switch (func) {
