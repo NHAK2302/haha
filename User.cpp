@@ -218,6 +218,7 @@ void updateUserInfo(User& u, int ord, FILE* f) {
 			printf("Nhap ho ten moi: ");
 			std::cin.ignore();
 			fgets(temp_string, sizeof(temp_string), stdin);
+			fflush(stdin);
 			strcpy(u.name, temp_string);
 			writeUser(u, f);
 			printf("Cap nhat thanh cong\n");
