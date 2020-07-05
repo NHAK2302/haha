@@ -26,3 +26,7 @@ void readUser(User& u, int ord, FILE* f);
 void writeUser(User& u, FILE*& f);
 
 void updateUserInfo(User& u, FILE* &f);
+
+void updatePass(User& u, FILE* f);
+
+void giveStatus(User& u, FILE* f);

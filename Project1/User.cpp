@@ -16,9 +16,9 @@ int loginUser(User& u,FILE* f) //tra ve ti`nh trang log
 	scanf("%s", &temp_string);
 	if (checkpassUser(ord, temp_string, f) == 0)
 	{
-		printf("Sai mat khau!\n");
 		do
 		{
+			printf("Sai mat khau!\n");
 			printf("Ban co muon nhap lai mat khau? (1 : co / 0 : khong) : ");
 			scanf("%d", &choice);
 			if (!choice)
@@ -178,7 +178,6 @@ void writeUser(User& u, FILE*& f)
 	rename("temp.txt", fUSER);
 	f = fopen(fUSER, "r+t");
 }
-
 void updateUserInfo(User& u, FILE* &f) {
 	if (f == NULL)
 	{
@@ -229,22 +228,50 @@ void updateUserInfo(User& u, FILE* &f) {
 		}
 
 		case 2: {
-
+			printf("Nhap ngay sinh moi:\n");
+			printf("Ngay: ");
+			scanf("%d", &u.birth.d);
+			printf("Thang: ");
+			scanf("%d", &u.birth.m);
+			printf("Nam: ");
+			scanf("%d", &u.birth.y);
+			// chua xong
+			writeUser(u, f);
+			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
 		}
 		case 3: {
-
+			char temp_string[LENGTH_MAX];
+			printf("Nhap CMND moi: ");
+			std::cin.ignore();
+			fgets(temp_string, sizeof(temp_string), stdin);
+			fflush(stdin);
+			temp_string[strlen(temp_string) - 1] = '\0';
+			copyString_statictodynamic(temp_string, u.identify_numb);
+			writeUser(u, f);
+			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
 		}
 		case 4: {
-
+			char temp_string[LENGTH_MAX];
+			printf("Nhap dia chi moi: ");
+			std::cin.ignore();
+			fgets(temp_string, sizeof(temp_string), stdin);
+			fflush(stdin);
+			temp_string[strlen(temp_string) - 1] = '\0';
+			copyString_statictodynamic(temp_string, u.address);
+			writeUser(u, f);
+			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
 		}
 		case 5: {
-
+			printf("Chon gioi tinh (1: Nam/ 0: Nu)\n");
+			scanf("%d", &u.sex);
+			writeUser(u, f);
+			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
 		}
@@ -264,4 +291,64 @@ void updateUserInfo(User& u, FILE* &f) {
 		}
 
 	} while (choice != 0);
+	rewind(f);
+}
+void updatePass(User& u, FILE* f) { //con 1 ty bug
+	if (f == NULL)
+	{
+		printf(".csv not found! writeUser failed \n");
+		return;
+	}
+	rewind(f);
+	char temp_string[LENGTH_MAX];
+	int ord, choice;
+	printf("Nhap mat khau hien tai: ");
+	scanf("%s", &temp_string);
+	ord = findUser(u.name, f);
+	if (checkpassUser(ord, temp_string, f) == 0)
+	{
+		do
+		{
+			printf("Sai mat khau!\n");
+			printf("Ban co muon nhap lai mat khau? (1 : co / 0 : khong) : ");
+			scanf("%d", &choice);
+			if (!choice)
+			{
+				rewind(f);
+				return;
+			}
+			printf("Nhap mat khau hien tai : ");
+			scanf("%s", &temp_string);
+		} while (checkpassUser(ord, temp_string, f) == 0);
+	}
+	printf("Nhap mat khau moi: ");
+	std::cin.ignore();
+	fgets(temp_string, sizeof(temp_string), stdin);
+	fflush(stdin);
+	temp_string[strlen(temp_string) - 1] = '\0';
+	copyString_statictodynamic(temp_string, u.password);
+	writeUser(u, f);
+	printf("Da thay doi mat khau thanh cong!\n");
+	rewind(f);
+}
+
+void giveStatus(User& u, FILE* f) {
+	if (f == NULL)
+	{
+		printf(".csv not found! writeUser failed \n");
+		return;
+	}
+	rewind(f);
+	int ord;
+	char name[LENGTH_MAX];
+	printf("Nhap ten nguoi dung ban muon phan quyen: ");
+	std::cin.ignore();
+	fgets(name, sizeof(name), stdin);
+	fflush(stdin);
+	name[strlen(name) - 1] = '\0';
+	ord = findUser(name, f);
+	printf("Nguoi nay se co chuc vu gi: (1: Chuyen vien/ 2: Quan ly): ");
+	scanf("%d", &u.status);
+	writeUser(u, f);
+	rewind(f);
 }
