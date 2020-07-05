@@ -172,3 +172,67 @@ void writeUser(User& u, FILE* f)
 	remove(fUSER);
 	rename("temp.txt", fUSER);
 }
+
+void updateUserInfo(User& u, FILE* f) {
+	if (f == NULL)
+	{
+		printf(".csv not found! writeUser failed \n");
+		return;
+	}
+	rewind(f);
+	int choice;
+	do {
+		printf("Nhung thong tin co the duoc cap nhat\n");
+		printf("1. Ho ten\n");
+		printf("2. Ngay sinh\n");
+		printf("3. CMND\n");
+		printf("4. Dia chi\n");
+		printf("5. Gioi tinh\n");
+		printf("6. Tinh trang\n");
+		printf("0. Quay lai\n");
+		printf("======================\n\n");
+		printf(" >> Chon thong tin ban muon cap nhat: ");
+		scanf_s("%d", &choice);
+		switch (choice) {
+		case 1: {
+
+			system("pause");
+			break;
+		}
+
+		case 2: {
+
+			system("pause");
+			break;
+		}
+		case 3: {
+
+			system("pause");
+			break;
+		}
+		case 4: {
+
+			system("pause");
+			break;
+		}
+		case 5: {
+
+			system("pause");
+			break;
+		}
+		case 6: {
+
+			system("pause");
+			break;
+		}
+		case 0: {
+			return;
+		}
+		default: {
+			printf("Nhap sai!\n");
+			system("pause");
+		}
+		}
+
+	} while (choice != 0);
+}

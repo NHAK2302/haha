@@ -23,3 +23,4 @@ int checkpassUser(int ord, char* pass, FILE* f);
 
 void readUser(User& u, int ord, FILE* f);
 
+void updateUserInfo(User& u, FILE* f);
