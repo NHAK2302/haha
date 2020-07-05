@@ -142,8 +142,13 @@ void writeUser(User& u, FILE* f)
 	rewind(f);
 	char temp_string[LENGTH_MAX * 4] = "\0";
 	FILE* temp_f = fopen("temp.txt", "w+t");
-	int line = 0;
+	int line = 1;
 	int n; fscanf(f, "%d\n", &n);
+	if (n < u.ord_numb)
+	{
+		n++;
+	}
+	fprintf(temp_f, "%d\n", &n);
 	while (!feof(f))
 	{
 		fscanf(f, "%[^\n]\n", temp_string);

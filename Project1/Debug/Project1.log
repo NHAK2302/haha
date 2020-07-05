@@ -1,3 +1,7 @@
-﻿  User.cpp
+﻿  Menu.cpp
+  Source.cpp
+E:\Do an cuoi ki\haha\Project1\Source.cpp(6,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  User.cpp
 E:\Do an cuoi ki\haha\Project1\User.cpp(86,9): warning C4101: 'status': unreferenced local variable
+  Generating Code...
   Project1.vcxproj -> E:\Do an cuoi ki\haha\Debug\Project1.exe
