@@ -9,6 +9,6 @@ void copyString_statictodynamic(char* stat, char* &dyn)
 {
 	if (stat == NULL)
 		return;
-	dyn = (char*)calloc(strlen(stat), sizeof(char));
+	dyn = (char*)calloc(strlen(stat)+1, sizeof(char));
 	strcpy(dyn, stat);
 }

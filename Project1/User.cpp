@@ -31,8 +31,13 @@ int loginUser(User& u,FILE* f) //tra ve ti`nh trang log
 		} while (checkpassUser(ord, temp_string, f) == 0);
 	}
 	readUser(u, ord, f);
+	if (u.status == 0)
+	{
+		printf("Tai khoan cua ban da bi khoa ! Vui long dang nhap lai bang tai khoan khac! \n");
+		return 0;
+	}
 	printf("Dang nhap thanh cong ! \n");
-	return u.status;
+	return u.type;
 
 }
 void logoutUser(User& u, int& log)

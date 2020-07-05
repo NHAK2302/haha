@@ -1,13 +1,44 @@
 #include <stdio.h>
 #include "Menu.h"
 #include "User.h"
-int login;
+int login=0;
 User u;
 int smallFunc;
 int func;
-void func1() {
+void func1(FILE* f) {
 	do {
 		system("cls");
+		printf("===========================================================================\n");
+		if (login == 0)
+		{
+			printf("Tinh trang : Chua dang nhap\n");
+		}
+		else
+		{
+			printf("Tinh trang : Da dang nhap\n");
+			printf("Xin chao, %s \n", u.name);
+			printf("Tham quyen tai khoan cua ban la : ");
+			switch (u.type)
+			{
+			case 1:
+			{
+				printf("Chuyen vien \n");
+				break;
+			}
+			case 2:
+			{
+				printf("Quan ly \n");
+				break;
+			}
+			case 3:
+			{
+				printf("Admin \n");
+				break;
+			}
+			default:
+				break;
+			}
+		}
 		printf("===========================================================================\n");
 		printf("Chuc nang 1: ...\n");
 		printf("===========================================================================\n");
@@ -24,34 +55,37 @@ void func1() {
 
 		switch (smallFunc) {
 		case 1: {
-			if (loginUser(u) != 0) {
-				printf("Ban da dang nhap\n");
+			if (login != 0) {
+				printf("Ban da dang nhap roi!\n");
 				system("pause");
 				break;
 			}
 			else {
-				printf("Goi ham dn\n"); //goi ham dn
+				login=loginUser(u, f);
 				system("pause");
 				break;
 			}
 		}
 		case 2: {
-			if (loginUser(u) == 0) {
+			if (login == 0) {
 				printf("Ban chua dang nhap\nKhong the su dung chuc nang nay\n");
 				system("pause");
-
 				break;
 			}
 			else {
-				printf("Goi ham dx\n"); //goi ham dx
+				logoutUser(u, login);
 				system("pause");
-
 				break;
 			}
 		}
 		case 3: {
-			if (loginUser(u) == 0) {
+			if (login == 0) {
 				printf("Ban chua dang nhap\nKhong the su dung chuc nang nay\n");
+				break;
+			}
+			else if (login < 3)
+			{
+				printf("Ban khong du tham quyen\nKhong the su dung chuc nang nay\n");
 				break;
 			}
 			else {
@@ -60,7 +94,7 @@ void func1() {
 			}
 		}
 		case 4: {
-			if (loginUser(u) == 0) {
+			if (loginUser(u,f) == 0) {
 				printf("Ban chua dang nhap\nKhong the su dung chuc nang nay\n");
 				break;
 			}
@@ -70,8 +104,8 @@ void func1() {
 			}
 		}
 		case 5: {
-			if (loginUser(u) == 3) {
-
+			if (login == 3) {
+				//ham function 5
 			}
 			break;
 		}
@@ -82,7 +116,7 @@ void func1() {
 	} while (smallFunc != 0);
 }
 
-void welcome() {
+void welcome(FILE* f) {
 	do {
 		system("cls");
 		printf("                               ***** Welcome! *****                        \n\n");
@@ -100,7 +134,7 @@ void welcome() {
 
 		switch (func) {
 		case 1: {
-			func1();
+			func1(f);
 			break;
 		}
 		case 0: {
