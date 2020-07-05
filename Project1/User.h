@@ -2,6 +2,7 @@
 #include"Date.h"
 #include "DynamicCString.h"
 #include<iostream>
+#define fUSER "user.csv"
 struct User {
 	int ord_numb; //da'nh so thu tu
 	char* ID, *password, *name,*identify_numb,*address;

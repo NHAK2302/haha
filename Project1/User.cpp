@@ -91,14 +91,9 @@ int checkpassUser(int ord,char* pass, FILE* f) //chua xong
 	{
 		fscanf(f, "%[^\n]\n", trash);
 	}
-	fscanf(f, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],", &trash, &trash, &pass_legit, &trash, &trash, &trash, &trash, &trash, &status);
+	fscanf(f, "%[^,],%[^,],%[^,]", &trash, &trash, &pass_legit);
 	if (strcmp(pass_legit, pass) == 0)
 	{
-		if (status == 0) {
-			printf("This account is already blocked\n");
-			rewind(f);
-			return 0;
-		}
 		rewind(f);
 		return 1;
 	}
@@ -134,10 +129,10 @@ void readUser(User& u,int ord, FILE* f)
 	copyString_statictodynamic(temp, u.address);
 	fscanf(f, "%[^,],", &temp);
 	u.birth=convertStringtoDate(temp);
-	fscanf(f, "%d,%d,%d\n", &u.sex,&u.status,&u.type);
+	fscanf(f, "%d,%d,%d", &u.sex,&u.status,&u.type);
 	rewind(f);
 }
-void writeUser(User& u, int ord, FILE* f)
+void writeUser(User& u, FILE* f)
 {
 	if (f == NULL)
 	{
@@ -145,6 +140,35 @@ void writeUser(User& u, int ord, FILE* f)
 		return;
 	}
 	rewind(f);
-	FILE* temp = fopen("temp.txt", "w+t");
-
+	char temp_string[LENGTH_MAX * 4] = "\0";
+	FILE* temp_f = fopen("temp.txt", "w+t");
+	int line = 0;
+	int n; fscanf(f, "%d\n", &n);
+	while (!feof(f))
+	{
+		fscanf(f, "%[^\n]\n", temp_string);
+		line++;
+		if (line == u.ord_numb)
+		{
+			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%d/%d/%d,%d,%d,%d\n"
+				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, u.birth.d, u.birth.m, u.birth.y,u.sex,u.status,u.type);
+		}
+		else
+		{
+			fprintf(temp_f, "%s\n", temp_string);
+		}
+	}
+	if (line <= u.ord_numb)
+	{
+		if (line == u.ord_numb)
+			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%d/%d/%d,%d,%d,%d\n"
+				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, u.birth.d, u.birth.m, u.birth.y, u.sex, u.status, u.type);
+		else
+			fprintf(temp_f, "\n");
+		line++;
+	}
+	fclose(f);
+	fclose(temp_f);
+	remove(fUSER);
+	rename("temp.txt", fUSER);
 }

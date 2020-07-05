@@ -1,7 +1,6 @@
 #include<iostream>
 #include"User.h"
 #include"Menu.h"
-#define fUSER "user.csv"
 using namespace std;
 void main()
 {
