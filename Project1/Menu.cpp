@@ -103,7 +103,7 @@ void func1(FILE* f) {
 					break;
 				}
 				else {
-					printf("Goi ham doi personal info\n"); //goi ham doi info
+					updateUserInfo(u, f);
 					system("pause");
 					break;
 				}

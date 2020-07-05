@@ -142,13 +142,13 @@ void writeUser(User& u, FILE*& f)
 	rewind(f);
 	char temp_string[LENGTH_MAX * 4] = "\0";
 	FILE* temp_f = fopen("temp.txt", "w+t");
-	int line = 1;
+	int line = 0;
 	int n; fscanf(f, "%d\n", &n);
 	if (n < u.ord_numb)
 	{
 		n++;
 	}
-	fprintf(temp_f, "%d\n", &n);
+	fprintf(temp_f, "%d\n", n);
 	while (!feof(f))
 	{
 		fscanf(f, "%[^\n]\n", temp_string);
@@ -163,7 +163,7 @@ void writeUser(User& u, FILE*& f)
 			fprintf(temp_f, "%s\n", temp_string);
 		}
 	}
-	if (line <= u.ord_numb)
+	while (line < u.ord_numb)
 	{
 		if (line == u.ord_numb)
 			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%d/%d/%d,%d,%d,%d\n"
@@ -176,10 +176,10 @@ void writeUser(User& u, FILE*& f)
 	fclose(temp_f);
 	remove(fUSER);
 	rename("temp.txt", fUSER);
-	f = fopen(fUSER, "w+t");
+	f = fopen(fUSER, "r+t");
 }
 
-void updateUserInfo(User& u, int ord, FILE* f) {
+void updateUserInfo(User& u, FILE* &f) {
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -211,6 +211,7 @@ void updateUserInfo(User& u, int ord, FILE* f) {
 		printf("0. Quay lai\n");
 		printf("============================================================\n\n");
 		printf(" >> Chon thong tin ban muon cap nhat: ");
+		fflush(stdout);
 		scanf("%d", &choice);
 		switch (choice) {
 		case 1: {
@@ -219,7 +220,8 @@ void updateUserInfo(User& u, int ord, FILE* f) {
 			std::cin.ignore();
 			fgets(temp_string, sizeof(temp_string), stdin);
 			fflush(stdin);
-			strcpy(u.name, temp_string);
+			temp_string[strlen(temp_string)-1] = '\0';
+			copyString_statictodynamic(temp_string, u.name);
 			writeUser(u, f);
 			printf("Cap nhat thanh cong\n");
 			system("pause");
@@ -257,6 +259,7 @@ void updateUserInfo(User& u, int ord, FILE* f) {
 		default: {
 			printf("Nhap sai!\n");
 			system("pause");
+			break;
 		}
 		}
 
