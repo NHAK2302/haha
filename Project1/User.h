@@ -21,3 +21,4 @@ int findUser(char* name, FILE* f);
 int checkpassUser(int ord, char* pass, FILE* f);
 
 void readUser(User& u, int ord, FILE* f);
+

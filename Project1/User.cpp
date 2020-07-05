@@ -137,3 +137,14 @@ void readUser(User& u,int ord, FILE* f)
 	fscanf(f, "%d,%d,%d\n", &u.sex,&u.status,&u.type);
 	rewind(f);
 }
+void writeUser(User& u, int ord, FILE* f)
+{
+	if (f == NULL)
+	{
+		printf(".csv not found! writeUser failed \n");
+		return;
+	}
+	rewind(f);
+	FILE* temp = fopen("temp.txt", "w+t");
+
+}

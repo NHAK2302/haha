@@ -175,6 +175,6 @@ void welcome(FILE* f) {
 		}
 		}
 	} while (func != 0);
-
+	logoutUser(u, login); //sau khi thoat chuong trinh phai logout(xoa du lieu tren ram) de tranh tran bo nho
 
 }
