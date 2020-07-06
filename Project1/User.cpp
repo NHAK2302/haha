@@ -293,7 +293,7 @@ void updateUserInfo(User& u, FILE* &f) {
 	} while (choice != 0);
 	rewind(f);
 }
-void updatePass(User& u, FILE* f) { //con 1 ty bug
+void updateUser_pass(User& u, FILE* f) { //con 1 ty bug
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -301,25 +301,22 @@ void updatePass(User& u, FILE* f) { //con 1 ty bug
 	}
 	rewind(f);
 	char temp_string[LENGTH_MAX];
-	int ord, choice;
+	int choice;
 	printf("Nhap mat khau hien tai: ");
 	scanf("%s", &temp_string);
-	ord = findUser(u.name, f);
-	if (checkpassUser(ord, temp_string, f) == 0)
+	
+	while (strcmp(temp_string,u.password)!=0)
 	{
-		do
+		printf("Sai mat khau!\n");
+		printf("Ban co muon nhap lai mat khau? (1 : co / 0 : khong) : ");
+		scanf("%d", &choice);
+		if (!choice)
 		{
-			printf("Sai mat khau!\n");
-			printf("Ban co muon nhap lai mat khau? (1 : co / 0 : khong) : ");
-			scanf("%d", &choice);
-			if (!choice)
-			{
-				rewind(f);
-				return;
-			}
-			printf("Nhap mat khau hien tai : ");
-			scanf("%s", &temp_string);
-		} while (checkpassUser(ord, temp_string, f) == 0);
+			rewind(f);
+			return;
+		}
+		printf("Nhap mat khau hien tai : ");
+		scanf("%s", &temp_string);
 	}
 	printf("Nhap mat khau moi: ");
 	std::cin.ignore();
@@ -331,7 +328,7 @@ void updatePass(User& u, FILE* f) { //con 1 ty bug
 	printf("Da thay doi mat khau thanh cong!\n");
 	rewind(f);
 } 
-//chua xong
+//cho Kiet debug
 
 void giveUser_status(User& u, FILE* f) {
 	if (f == NULL)

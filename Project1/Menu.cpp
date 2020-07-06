@@ -5,7 +5,7 @@ int login=0;
 User u;
 int smallFunc;
 int func;
-void func1(FILE* f) {
+void func1(FILE* &f) {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -91,7 +91,7 @@ void func1(FILE* f) {
 					break;
 				}
 				else {
-					printf("Goi ham doi pass\n"); //goi ham doi pass
+					updateUser_pass(u, f);
 					system("pause");
 					break;
 				}
@@ -143,7 +143,7 @@ void func1(FILE* f) {
 	} while (smallFunc != 0);
 }
 
-void func2(FILE* f) {
+void func2(FILE* &f) {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -280,7 +280,7 @@ void func2(FILE* f) {
 	} while (smallFunc != 0);
 }
 
-void func3(FILE* f) {
+void func3(FILE* &f) {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -432,7 +432,7 @@ void func3(FILE* f) {
 	} while (smallFunc != 0);
 }
 
-void func4(FILE* f) {
+void func4(FILE* &f) {
 	system("cls");
 	printf("=======================================================================================================================\n");
 	printf("Chuc nang 4: Lap phieu muon sach\n");
@@ -473,7 +473,7 @@ void func4(FILE* f) {
 	return;
 }
 
-void func5(FILE* f) {
+void func5(FILE* &f) {
 	system("cls");
 	printf("=======================================================================================================================\n");
 	printf("Chuc nang 5: Lap phieu tra sach\n");
@@ -514,7 +514,7 @@ void func5(FILE* f) {
 	return;
 }
 
-void func6(FILE* f) {
+void func6(FILE* &f) {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -616,7 +616,7 @@ void func6(FILE* f) {
 }
 
 
-void welcome(FILE* f) {
+void welcome(FILE* &f) {
 	do {
 		system("cls");
 		printf("                                                   ***** Welcome! *****                         \n\n");

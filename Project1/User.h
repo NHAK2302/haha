@@ -27,6 +27,8 @@ void writeUser(User& u, FILE*& f);
 
 void updateUserInfo(User& u, FILE* &f);
 
-void updatePass(User& u, FILE* f);
+void updateUser_pass(User& u, FILE* f);
 
-void giveStatus(User& u, FILE* f);
+void giveUser_status(User& u, FILE* f);
+
+

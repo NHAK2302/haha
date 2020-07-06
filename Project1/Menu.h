@@ -1,2 +1,2 @@
 #pragma once
-void welcome(FILE* f);
+void welcome(FILE* &f);
