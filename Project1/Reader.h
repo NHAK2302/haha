@@ -1,6 +1,7 @@
 #pragma once
 #include"Date.h"
 #include<iostream>
+#define fREADER "reader.csv"
 using namespace std;
 struct Reader {
 	char* ID, name, indentify_numb,email,address;

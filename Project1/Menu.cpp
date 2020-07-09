@@ -5,7 +5,8 @@ int login=0;
 User u;
 int smallFunc;
 int func;
-void func1(FILE* &f) {
+FILE* fUser = fopen(fUSER,"r+t");
+void func1(FILE* &fUser) {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -61,7 +62,7 @@ void func1(FILE* &f) {
 					break;
 				}
 				else {
-					login=loginUser(u, f);
+					login=loginUser(u, fUser);
 					system("pause");
 					break;
 				}
@@ -91,7 +92,7 @@ void func1(FILE* &f) {
 					break;
 				}
 				else {
-					updateUser_pass(u, f);
+					updateUser_pass(u, fUser);
 					system("pause");
 					break;
 				}
@@ -103,7 +104,7 @@ void func1(FILE* &f) {
 					break;
 				}
 				else {
-					updateUserInfo(u, f);
+					updateUserInfo(u, fUser);
 					system("pause");
 					break;
 				}
@@ -614,7 +615,6 @@ void func6(FILE* &f) {
 		}
 	} while (smallFunc != 0);
 }
-
 
 void welcome(FILE* &f) {
 	do {

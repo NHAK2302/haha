@@ -12,7 +12,6 @@ struct User {
 	int type;
 };
 
-
 int loginUser(User& u, FILE* f);
 
 void logoutUser(User& u, int& log);
