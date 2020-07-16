@@ -4,6 +4,5 @@
 using namespace std;
 void main()
 {
-	FILE* f = fopen(fUSER,"r+t");
-	welcome(f);
+	welcome();
 }

@@ -141,7 +141,7 @@ void writeUser(User& u, FILE*& f)
 	}
 	rewind(f);
 	char temp_string[LENGTH_MAX * 4] = "\0";
-	FILE* temp_f = fopen("temp.txt", "w+t");
+	FILE* temp_f = fopen("temp.txt", "w+");
 	int line = 0;
 	int n; fscanf(f, "%d\n", &n);
 	if (n < u.ord_numb)
@@ -174,9 +174,10 @@ void writeUser(User& u, FILE*& f)
 	}
 	fclose(f);
 	fclose(temp_f);
-	remove(fUSER);
-	rename("temp.txt", fUSER);
-	f = fopen(fUSER, "r+t");
+	int check=remove(fUSER);
+	printf("%s",strerror(check));
+	check=rename("temp.txt", fUSER);
+	f = fopen(fUSER, "r");
 }
 void updateUserInfo(User& u, FILE* &f) {
 	if (f == NULL)
@@ -293,7 +294,7 @@ void updateUserInfo(User& u, FILE* &f) {
 	} while (choice != 0);
 	rewind(f);
 }
-void updateUser_pass(User& u, FILE* f) { //con 1 ty bug
+void updateUser_pass(User& u, FILE* &f) { //con 1 ty bug
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -330,7 +331,7 @@ void updateUser_pass(User& u, FILE* f) { //con 1 ty bug
 } 
 //cho Kiet debug
 
-void giveUser_status(User& u, FILE* f) {
+void giveUser_status(User& u, FILE* &f) {
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -346,8 +347,10 @@ void giveUser_status(User& u, FILE* f) {
 	name[strlen(name) - 1] = '\0';
 	ord = findUser(name, f);
 	printf("Nguoi nay se co chuc vu gi: (1: Chuyen vien/ 2: Quan ly): ");
-	scanf("%d", &u.status);
-	writeUser(u, f);
+	User change;
+	readUser(change, ord,f);
+	scanf("%d", &change.status);
+	writeUser(change, f);
 	rewind(f);
 } 
 // chua debug

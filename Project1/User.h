@@ -2,6 +2,7 @@
 #include"Date.h"
 #include "DynamicCString.h"
 #include<iostream>
+#include<stdio.h> 
 #define fUSER "user.csv"
 struct User {
 	int ord_numb; //da'nh so thu tu
@@ -26,8 +27,8 @@ void writeUser(User& u, FILE*& f);
 
 void updateUserInfo(User& u, FILE* &f);
 
-void updateUser_pass(User& u, FILE* f);
+void updateUser_pass(User& u, FILE* &f);
 
-void giveUser_status(User& u, FILE* f);
+void giveUser_status(User& u, FILE* &f);
 
 

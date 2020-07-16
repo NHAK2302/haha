@@ -7,10 +7,10 @@ int login=0;
 User u;
 int smallFunc;
 int func;
-FILE* fUser = fopen(fUSER,"r+t");
+FILE* fUser = fopen(fUSER,"r");
 FILE* fReader = fopen(fREADER, "r+t");
 FILE* fBook = fopen(fBOOK, "r+t");
-void func1(FILE* &fUser) {
+void func1() {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -89,12 +89,6 @@ void func1(FILE* &fUser) {
 					system("pause");
 					break;
 				}
-				else if (login < 3)
-				{
-					printf("Ban khong du tham quyen\nKhong the su dung chuc nang nay\n");
-					system("pause");
-					break;
-				}
 				else {
 					updateUser_pass(u, fUser);
 					system("pause");
@@ -127,7 +121,7 @@ void func1(FILE* &fUser) {
 			}
 			case 6: {
 				if (login == 3) {
-					printf("Goi ham phan quyen user\n"); //goi ham phan quyen user
+					giveUser_status(u, fUser); //goi ham phan quyen user
 					system("pause");
 					break;
 				}
@@ -148,7 +142,7 @@ void func1(FILE* &fUser) {
 	} while (smallFunc != 0);
 }
 
-void func2(FILE* &f) {
+void func2() {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -285,7 +279,7 @@ void func2(FILE* &f) {
 	} while (smallFunc != 0);
 }
 
-void func3(FILE* &f) {
+void func3() {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -437,7 +431,7 @@ void func3(FILE* &f) {
 	} while (smallFunc != 0);
 }
 
-void func4(FILE* &f) {
+void func4() {
 	system("cls");
 	printf("=======================================================================================================================\n");
 	printf("Chuc nang 4: Lap phieu muon sach\n");
@@ -478,7 +472,7 @@ void func4(FILE* &f) {
 	return;
 }
 
-void func5(FILE* &f) {
+void func5() {
 	system("cls");
 	printf("=======================================================================================================================\n");
 	printf("Chuc nang 5: Lap phieu tra sach\n");
@@ -519,7 +513,7 @@ void func5(FILE* &f) {
 	return;
 }
 
-void func6(FILE* &f) {
+void func6() {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
@@ -620,7 +614,7 @@ void func6(FILE* &f) {
 	} while (smallFunc != 0);
 }
 
-void welcome(FILE* &f) {
+void welcome() {
 	do {
 		system("cls");
 		printf("                                                   ***** Welcome! *****                         \n\n");
@@ -668,27 +662,27 @@ void welcome(FILE* &f) {
 
 		switch (func) {
 		case 1: {
-			func1(f);
+			func1();
 			break;
 		}
 		case 2: {
-			func2(f);
+			func2();
 			break;
 		}
 		case 3: {
-			func3(f);
+			func3();
 			break;
 		}
 		case 4: {
-			func4(f);
+			func4();
 			break;
 		}
 		case 5: {
-			func5(f);
+			func5();
 			break;
 		}
 		case 6: {
-			func6(f);
+			func6();
 			break;
 		}
 		case 0: {

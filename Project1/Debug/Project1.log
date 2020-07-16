@@ -1,3 +1,7 @@
-﻿  User.cpp
-E:\Do an cuoi ki\haha\Project1\User.cpp(86,9): warning C4101: 'status': unreferenced local variable
+﻿  Menu.cpp
+E:\Do an cuoi ki\haha\Project1\Book.h(14,18): warning C4200: nonstandard extension used: zero-sized array in struct/union
+E:\Do an cuoi ki\haha\Project1\Book.h(14,18): message : This member will be ignored by a defaulted constructor or copy/move assignment operator
+  Source.cpp
+E:\Do an cuoi ki\haha\Project1\Source.cpp(6,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Generating Code...
   Project1.vcxproj -> E:\Do an cuoi ki\haha\Debug\Project1.exe
