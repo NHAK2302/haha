@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include "Menu.h"
 #include "User.h"
+#include"Reader.h"
+#include"Book.h"
 int login=0;
 User u;
 int smallFunc;
 int func;
 FILE* fUser = fopen(fUSER,"r+t");
+FILE* fReader = fopen(fREADER, "r+t");
+FILE* fBook = fopen(fBOOK, "r+t");
 void func1(FILE* &fUser) {
 	do {
 		system("cls");
