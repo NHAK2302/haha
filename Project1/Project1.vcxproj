@@ -146,6 +146,7 @@
     <ClCompile Include="DynamicCString.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Book.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="DynamicCString.h" />
     <ClInclude Include="Menu.h" />
