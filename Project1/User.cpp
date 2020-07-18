@@ -354,3 +354,43 @@ void giveUser_status(User& u, FILE* &f) {
 	rewind(f);
 } 
 // chua debug
+
+void createUser(User& u, FILE*& f) {
+	if (f == NULL)
+	{
+		printf(".csv not found! writeUser failed \n");
+		return;
+	}
+	rewind(f);
+	char temp_string[LENGTH_MAX];
+	int n;
+	User u_temp;
+	fscanf(f, "%d\n", &n);
+	printf("Nhap ID : ");
+	scanf("%s", &temp_string);
+	copyString_statictodynamic(temp_string, u.ID);
+	for (int i = 1; i <= n; i++) {
+		readUser(u_temp, i, f);
+		if (strcmp(u_temp.ID, u.ID) == 0) {
+			printf("Nguoi dung nay ton tai!\n");
+			return;
+		}
+		fscanf(f, "%[^\n]\n", &temp_string);
+	}
+	strcpy(u.password, "123");
+	strcpy(u.address, "unknown");
+	strcpy(u.identify_numb, "unknown");
+	strcpy(u.name, "unknown");
+	u.birth.d = u.birth.m = u.birth.y = 1;
+	u.sex = 0;
+	u.status = 1;
+	u.type = 1;
+	u.ord_numb = n + 1;
+	writeUser(u, f);
+	fseek(f, 0, SEEK_SET);
+	fprintf(f, "%d", n + 1);
+	printf("\nDa tao nguoi dung co ID: %s\n", u.ID);
+	printf("\Mat khau mac dinh: %s\n", u.address);
+	printf("Hay cap nhat thong tin ca nhan trong lan dang nhap sau\n");
+	rewind(f);
+}

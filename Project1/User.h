@@ -31,4 +31,5 @@ void updateUser_pass(User& u, FILE* &f);
 
 void giveUser_status(User& u, FILE* &f);
 
+void createUser(User& u, FILE*& f);
 

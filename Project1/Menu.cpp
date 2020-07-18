@@ -7,7 +7,7 @@ int login=0;
 User u;
 int smallFunc;
 int func;
-FILE* fUser = fopen(fUSER,"r");
+FILE* fUser = fopen(fUSER,"r+t");
 FILE* fReader = fopen(fREADER, "r+t");
 FILE* fBook = fopen(fBOOK, "r+t");
 void func1() {
@@ -110,6 +110,7 @@ void func1() {
 			case 5: {
 				if (login == 3) {
 					//ham function 5
+					//createUser(u, fUser);
 					system("pause");
 					break;
 				}
