@@ -13,9 +13,10 @@ struct User {
 	int type;
 };
 
-int loginUser(User& u, FILE* f);
 
-void logoutUser(User& u, int& log);
+int loginUser(FILE* f);
+
+void logoutUser(int& log);
 
 int findUser(char* name, FILE* f);
 
@@ -25,10 +26,12 @@ void readUser(User& u, int ord, FILE* f);
 
 void writeUser(User& u, FILE*& f);
 
-void updateUserInfo(User& u, FILE* &f);
 
-void updateUser_pass(User& u, FILE* &f);
+void updateUserInfo(FILE*& f);
 
-void giveUser_status(User& u, FILE* &f);
+void updateUser_pass(FILE*& f);
+
+void giveUser_status(FILE*& f);
+
 
 

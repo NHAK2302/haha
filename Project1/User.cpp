@@ -1,6 +1,7 @@
 #include "User.h"
+User u;
 
-int loginUser(User& u,FILE* f) //tra ve ti`nh trang log
+int loginUser(FILE* f) //tra ve ti`nh trang log
 {
 	int ord,choice;
 	char temp_string[LENGTH_MAX];
@@ -30,7 +31,7 @@ int loginUser(User& u,FILE* f) //tra ve ti`nh trang log
 			scanf("%s", &temp_string);
 		} while (checkpassUser(ord, temp_string, f) == 0);
 	}
-	readUser(u, ord, f);
+	readUser(u,ord, f);
 	if (u.status == 0)
 	{
 		printf("Tai khoan cua ban da bi khoa! Vui long dang nhap lai bang tai khoan khac! \n");
@@ -40,7 +41,7 @@ int loginUser(User& u,FILE* f) //tra ve ti`nh trang log
 	return u.type;
 
 }
-void logoutUser(User& u, int& log)
+void logoutUser( int& log)
 {
 	free(u.ID);
 	free(u.password);
@@ -103,11 +104,11 @@ int checkpassUser(int ord,char* pass, FILE* f) //chua xong
 		return 0;
 	}
 }
-void readUser(User& u,int ord, FILE* f)
+void readUser(User&u,int ord, FILE* f)
 {
 	if (f == NULL)
 	{
-		printf(".csv not found! ReadUser failed \n");
+		printf(".csv not found! ReadCSV failed \n");
 		return;
 	}
 	char temp[LENGTH_MAX];
@@ -156,7 +157,7 @@ void writeUser(User& u, FILE*& f)
 		if (line == u.ord_numb)
 		{
 			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%d/%d/%d,%d,%d,%d\n"
-				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, u.birth.d, u.birth.m, u.birth.y,u.sex,u.status,u.type);
+				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, u.birth.d, u.birth.m, u.birth.y,u.sex,u.type,u.status);
 		}
 		else
 		{
@@ -174,12 +175,11 @@ void writeUser(User& u, FILE*& f)
 	}
 	fclose(f);
 	fclose(temp_f);
-	int check=remove(fUSER);
-	printf("%s",strerror(check));
-	check=rename("temp.txt", fUSER);
+	remove(fUSER);
+	rename("temp.txt", fUSER);
 	f = fopen(fUSER, "r");
 }
-void updateUserInfo(User& u, FILE* &f) {
+void updateUserInfo(FILE* &f) {
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -222,7 +222,7 @@ void updateUserInfo(User& u, FILE* &f) {
 			fflush(stdin);
 			temp_string[strlen(temp_string)-1] = '\0';
 			copyString_statictodynamic(temp_string, u.name);
-			writeUser(u, f);
+			writeUser(u,f);
 			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
@@ -237,7 +237,7 @@ void updateUserInfo(User& u, FILE* &f) {
 			printf("Nam: ");
 			scanf("%d", &u.birth.y);
 			// chua xong
-			writeUser(u, f);
+			writeUser(u,f);
 			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
@@ -250,7 +250,7 @@ void updateUserInfo(User& u, FILE* &f) {
 			fflush(stdin);
 			temp_string[strlen(temp_string) - 1] = '\0';
 			copyString_statictodynamic(temp_string, u.identify_numb);
-			writeUser(u, f);
+			writeUser(u,f);
 			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
@@ -263,7 +263,7 @@ void updateUserInfo(User& u, FILE* &f) {
 			fflush(stdin);
 			temp_string[strlen(temp_string) - 1] = '\0';
 			copyString_statictodynamic(temp_string, u.address);
-			writeUser(u, f);
+			writeUser(u,f);
 			printf("Cap nhat thanh cong\n");
 			system("pause");
 			break;
@@ -294,7 +294,7 @@ void updateUserInfo(User& u, FILE* &f) {
 	} while (choice != 0);
 	rewind(f);
 }
-void updateUser_pass(User& u, FILE* &f) { //con 1 ty bug
+void updateUser_pass(FILE* &f) { //con 1 ty bug
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -325,13 +325,13 @@ void updateUser_pass(User& u, FILE* &f) { //con 1 ty bug
 	fflush(stdin);
 	temp_string[strlen(temp_string) - 1] = '\0';
 	copyString_statictodynamic(temp_string, u.password);
-	writeUser(u, f);
+	writeUser(u,f);
 	printf("Da thay doi mat khau thanh cong!\n");
 	rewind(f);
 } 
 //cho Kiet debug
 
-void giveUser_status(User& u, FILE* &f) {
+void giveUser_status(FILE* &f) {
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -346,9 +346,9 @@ void giveUser_status(User& u, FILE* &f) {
 	fflush(stdin);
 	name[strlen(name) - 1] = '\0';
 	ord = findUser(name, f);
-	printf("Nguoi nay se co chuc vu gi: (1: Chuyen vien/ 2: Quan ly): ");
 	User change;
 	readUser(change, ord,f);
+	printf("Nguoi nay se co chuc vu gi: (1: Chuyen vien/ 2: Quan ly): ");
 	scanf("%d", &change.status);
 	writeUser(change, f);
 	rewind(f);

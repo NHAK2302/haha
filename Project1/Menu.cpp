@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include "Menu.h"
-#include "User.h"
-#include"Reader.h"
-#include"Book.h"
+extern User u;
 int login=0;
-User u;
 int smallFunc;
 int func;
 FILE* fUser = fopen(fUSER,"r");
@@ -66,7 +63,7 @@ void func1() {
 					break;
 				}
 				else {
-					login=loginUser(u, fUser);
+					login=loginUser(fUser);
 					system("pause");
 					break;
 				}
@@ -78,7 +75,7 @@ void func1() {
 					break;
 				}
 				else {
-					logoutUser(u, login);
+					logoutUser(login);
 					system("pause");
 					break;
 				}
@@ -90,7 +87,7 @@ void func1() {
 					break;
 				}
 				else {
-					updateUser_pass(u, fUser);
+					updateUser_pass(fUser);
 					system("pause");
 					break;
 				}
@@ -102,7 +99,7 @@ void func1() {
 					break;
 				}
 				else {
-					updateUserInfo(u, fUser);
+					updateUserInfo(fUser);
 					system("pause");
 					break;
 				}
@@ -121,7 +118,7 @@ void func1() {
 			}
 			case 6: {
 				if (login == 3) {
-					giveUser_status(u, fUser); //goi ham phan quyen user
+					giveUser_status(fUser); //goi ham phan quyen user
 					system("pause");
 					break;
 				}
@@ -695,5 +692,5 @@ void welcome() {
 		}
 		}
 	} while (func != 0);
-	logoutUser(u, login); //sau khi thoat chuong trinh phai logout(xoa du lieu tren ram) de tranh tran bo nho
+	logoutUser(login); //sau khi thoat chuong trinh phai logout(xoa du lieu tren ram) de tranh tran bo nho
 }
