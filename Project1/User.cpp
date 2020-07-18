@@ -166,12 +166,12 @@ void writeUser(User& u, FILE*& f)
 	}
 	while (line < u.ord_numb)
 	{
+		line++;
 		if (line == u.ord_numb)
 			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%d/%d/%d,%d,%d,%d\n"
 				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, u.birth.d, u.birth.m, u.birth.y, u.sex, u.status, u.type);
 		else
 			fprintf(temp_f, "\n");
-		line++;
 	}
 	fclose(f);
 	fclose(temp_f);
@@ -355,7 +355,7 @@ void giveUser_status(FILE* &f) {
 } 
 // chua debug
 
-void createUser(User& u, FILE*& f) {
+void createUser( FILE*& f) {
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -365,32 +365,32 @@ void createUser(User& u, FILE*& f) {
 	char temp_string[LENGTH_MAX];
 	int n;
 	User u_temp;
+	User u_add;
 	fscanf(f, "%d\n", &n);
 	printf("Nhap ID : ");
-	scanf("%s", &temp_string);
-	copyString_statictodynamic(temp_string, u.ID);
+	std::cin.ignore();
+	scanf("%[^\n]%*c", temp_string);
+	copyString_statictodynamic(temp_string, u_add.ID);
 	for (int i = 1; i <= n; i++) {
 		readUser(u_temp, i, f);
-		if (strcmp(u_temp.ID, u.ID) == 0) {
+		if (strcmp(u_temp.ID, u_add.ID) == 0) {
 			printf("Nguoi dung nay ton tai!\n");
 			return;
 		}
 		fscanf(f, "%[^\n]\n", &temp_string);
 	}
-	strcpy(u.password, "123");
-	strcpy(u.address, "unknown");
-	strcpy(u.identify_numb, "unknown");
-	strcpy(u.name, "unknown");
-	u.birth.d = u.birth.m = u.birth.y = 1;
-	u.sex = 0;
-	u.status = 1;
-	u.type = 1;
-	u.ord_numb = n + 1;
-	writeUser(u, f);
+	printf("Nhap mat khau :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.password);
+	printf("Nhap ho ten :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.name);
+	printf("Nhap ngay sinh :"); scanf("%[^\n]%*c", temp_string); u_add.birth=convertStringtoDate(temp_string);
+	printf("Nhap CMND :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.identify_numb);
+	printf("Nhap dia chi :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.address);
+	printf("Nhap gioi tinh ( 0- Nu / 1 - Nam) :"); scanf("%d", &u_add.sex); 
+	printf("Nguoi nay co phan quyen la :(1-chuyen vien /2- quan ly)"); scanf("%d", &u_add.type);
+	u_add.status = 1;
+	u_add.ord_numb = n + 1;
+	writeUser(u_add, f);
 	fseek(f, 0, SEEK_SET);
 	fprintf(f, "%d", n + 1);
-	printf("\nDa tao nguoi dung co ID: %s\n", u.ID);
-	printf("\Mat khau mac dinh: %s\n", u.address);
-	printf("Hay cap nhat thong tin ca nhan trong lan dang nhap sau\n");
+	printf("\nDa tao nguoi dung co ID: %s\n", u_add.ID);
 	rewind(f);
 }

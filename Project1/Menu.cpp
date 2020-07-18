@@ -107,7 +107,7 @@ void func1() {
 			case 5: {
 				if (login == 3) {
 					//ham function 5
-					//createUser(u, fUser);
+					createUser(fUser);
 					system("pause");
 					break;
 				}
