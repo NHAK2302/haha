@@ -26,13 +26,10 @@ void readUser(User& u, int ord, FILE* f);
 
 void writeUser(User& u, FILE*& f);
 
-
 void updateUserInfo(FILE*& f);
 
 void updateUser_pass(FILE*& f);
 
 void giveUser_status(FILE*& f);
 
-
-void createUser( FILE*& f);
-
+void createUser(FILE*& f);

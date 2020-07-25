@@ -157,7 +157,7 @@ void writeUser(User& u, FILE*& f)
 		if (line == u.ord_numb)
 		{
 			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%d/%d/%d,%d,%d,%d\n"
-				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, u.birth.d, u.birth.m, u.birth.y,u.sex,u.type,u.status);
+				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, u.birth.d, u.birth.m, u.birth.y,u.sex,u.status,u.type);
 		}
 		else
 		{
@@ -201,13 +201,6 @@ void updateUserInfo(FILE* &f) {
 		else {
 			printf("Nu\n");
 		}
-		printf("6. Tinh trang    : ");
-		if (u.status) {
-			printf("Activated\n");
-		}
-		else {
-			printf("Blocked\n");
-		}
 		printf("0. Quay lai\n");
 		printf("============================================================\n\n");
 		printf(" >> Chon thong tin ban muon cap nhat: ");
@@ -236,7 +229,6 @@ void updateUserInfo(FILE* &f) {
 			scanf("%d", &u.birth.m);
 			printf("Nam: ");
 			scanf("%d", &u.birth.y);
-			// chua xong
 			writeUser(u,f);
 			printf("Cap nhat thanh cong\n");
 			system("pause");
@@ -273,11 +265,6 @@ void updateUserInfo(FILE* &f) {
 			scanf("%d", &u.sex);
 			writeUser(u, f);
 			printf("Cap nhat thanh cong\n");
-			system("pause");
-			break;
-		}
-		case 6: {
-
 			system("pause");
 			break;
 		}
