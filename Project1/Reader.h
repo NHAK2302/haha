@@ -1,7 +1,6 @@
 #pragma once
 #include "Date.h"
 #include <iostream>
-#include <stdio.h>
 #include "DynamicCString.h"
 #define fREADER "reader.csv"
 using namespace std;
@@ -13,12 +12,24 @@ struct Reader {
 
 void readReader(Reader& r, int ord, FILE* f);
 
-int findReaderByIdenNumb(char* ID, FILE* f);
+int findReaderByIdenNumb(char* ID, FILE* f,int* result);
 
 void writeReader(Reader& r, FILE*& f);
 
-int findReaderByName(char* name, FILE* f);
+void findReaderByIdenNumb_interface(FILE* f);
+
+void findReaderByName_interface(FILE* f);
+
+int findReaderByName(char* name, FILE* f, int* result);
 
 void updateReaderInfo(FILE*& f);
 
 void createReader(FILE*& f);
+
+void readReader_all(FILE* f);
+
+void outputReader(Reader& r);
+
+void readReader_array(FILE* f, int* ord, Reader* arr, int n);
+
+int chooseReader(Reader* arr, int n);

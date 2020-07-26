@@ -156,8 +156,9 @@ void writeUser(User& u, FILE*& f)
 		line++;
 		if (line == u.ord_numb)
 		{
-			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%d/%d/%d,%d,%d,%d\n"
-				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, u.birth.d, u.birth.m, u.birth.y,u.sex,u.status,u.type);
+			char* birth_string = convertDatetoString(u.birth);
+			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%s,%d,%d,%d\n"
+				, u.ord_numb, u.ID, u.password, u.name, u.identify_numb, u.address, birth_string,u.sex,u.status,u.type);
 		}
 		else
 		{
@@ -368,7 +369,12 @@ void createUser( FILE*& f) {
 	}
 	printf("Nhap mat khau :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.password);
 	printf("Nhap ho ten :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.name);
-	printf("Nhap ngay sinh :"); scanf("%[^\n]%*c", temp_string); u_add.birth=convertStringtoDate(temp_string);
+	printf("Ngay: ");
+	scanf("%d", &u_add.birth.d);
+	printf("Thang: ");
+	scanf("%d", &u_add.birth.m);
+	printf("Nam: ");
+	scanf("%d", &u_add.birth.y);
 	printf("Nhap CMND :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.identify_numb);
 	printf("Nhap dia chi :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.address);
 	printf("Nhap gioi tinh ( 0- Nu / 1 - Nam) :"); scanf("%d", &u_add.sex); 

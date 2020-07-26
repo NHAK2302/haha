@@ -7,3 +7,5 @@ struct Date {
 };
 
 Date convertStringtoDate(char* str);
+
+char* convertDatetoString(Date d);

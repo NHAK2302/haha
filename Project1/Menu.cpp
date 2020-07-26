@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Menu.h"
 extern User u;
+extern Book b;
 int login=0;
 int smallFunc;
 int func;
@@ -197,6 +198,7 @@ void func2() {
 				}
 				else {
 					printf("Chua co ham\n"); //xem list reader
+					readReader_all(fReader);
 					system("pause");
 					break;
 				}
@@ -209,6 +211,7 @@ void func2() {
 				}
 				else {
 					printf("Chua co ham\n"); //add reader
+					createReader(fReader);
 					system("pause");
 					break;
 				}
@@ -221,6 +224,7 @@ void func2() {
 				}
 				else {
 					printf("Chua co ham\n"); //xem list reader
+					updateReaderInfo(fReader);
 					system("pause");
 					break;
 				}
@@ -250,6 +254,7 @@ void func2() {
 				}
 				else {
 					printf("Chua co ham\n"); //find reader by cmnd
+					findReaderByIdenNumb_interface(fReader);
 					system("pause");
 					break;
 				}
@@ -262,6 +267,7 @@ void func2() {
 				}
 				else {
 					printf("Chua co ham\n"); //find books by full name
+					findReaderByName_interface(fReader);
 					system("pause");
 					break;
 				}

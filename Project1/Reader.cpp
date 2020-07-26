@@ -29,35 +29,9 @@ void readReader(Reader& r, int ord, FILE* f) {
 	copyString_statictodynamic(temp, r.address);
 	fscanf(f, "%[^,],", &temp);
 	r.mfg = convertStringtoDate(temp);
-	fscanf(f, "%[^,]", &temp);
+	fscanf(f, "%[^\n]\n", &temp);
 	r.exp = convertStringtoDate(temp);
 	rewind(f);
-}
-
-int findReaderByIdenNumb(char* ID, FILE* f) { //tim theo CMND, tra ve stt, tra ve -1 neu k tim thay
-	if (f == NULL)
-	{
-		printf(".csv not found! ReadCSV failed \n");
-		return -1;
-	}
-	char trash[LENGTH_MAX];
-	int ord;
-	char ID_temp[LENGTH_MAX];
-	rewind(f);
-	int n;
-	fscanf(f, "%d\n", &n);
-	for (int i = 1; i <= n; i++)
-	{
-		fscanf(f, "%d,%[^,],%[^,],%[^,],", &ord, &trash, &trash, &ID_temp);
-		if (strcmp(ID, ID_temp) == 0)
-		{
-			rewind(f);
-			return ord;
-		}
-		fscanf(f, "%[^\n]\n", trash);
-	}
-	rewind(f);
-	return -1;
 }
 
 void writeReader(Reader& r, FILE*& f) {
@@ -108,12 +82,71 @@ void writeReader(Reader& r, FILE*& f) {
 	f = fopen(fREADER, "r");
 }
 
-int findReaderByName(char* name, FILE* f) { //tim theo ho ten
+int findReaderByIdenNumb(char* ID, FILE* f,int* result) { //tim theo CMND, tra ve so luong , tra ve -1 neu file loi, 0 neu khong tim thay
+	if (f == NULL||result==NULL)
+	{
+		printf(".csv not found or memory error! ReadCSV failed \n");
+		return -1;
+	}
+	int k = 0;
+	char trash[LENGTH_MAX];
+	int ord;
+	char ID_temp[LENGTH_MAX];
+	rewind(f);
+	int n;
+	fscanf(f, "%d\n", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		fscanf(f, "%d,%[^,],%[^,],%[^,],", &ord, &trash, &trash, &ID_temp);
+		if (strcmp(ID, ID_temp) == 0)
+		{
+			result[k++] = ord;
+		}
+		fscanf(f, "%[^\n]\n", trash);
+	}
+	rewind(f);
+	return k;
+}
+
+void findReaderByIdenNumb_interface(FILE* f)
+{
+	char ID_numb[LENGTH_MAX];
+	int ord[100], n, choice; // 100 thang trung ten nhau la het co~
+	Reader rArray[100];
+	printf("Nhap CMND nguoi doc :"); cin.ignore(); scanf("%[^\n]%*c", ID_numb);
+	if ((n = findReaderByIdenNumb(ID_numb,f,ord)) <= 0)
+	{
+		printf("Khong tim thay doc gia!");
+		return;
+	}
+	readReader_array(f, ord, rArray, n);
+	choice = chooseReader(rArray, n);
+	readReader(r, ord[choice], f);
+}
+
+void findReaderByName_interface(FILE* f)
+{
+	char name[LENGTH_MAX];
+	int ord[100],n,choice; // 100 thang trung ten nhau la het co~
+	Reader rArray[100];
+	printf("Nhap ho ten nguoi doc :"); cin.ignore(); scanf("%[^\n]%*c", name);
+	if ((n=findReaderByName(name, f, ord)) <= 0)
+	{
+		printf("Khong tim thay doc gia!");
+		return;
+	}
+	readReader_array(f, ord, rArray,n);
+	choice = chooseReader(rArray, n);
+	readReader(r, ord[choice], f);
+}
+
+int findReaderByName(char* name, FILE* f,int* result) { //tim theo ho ten, tra ve so ket qua?
 	if (f == NULL)
 	{
 		printf(".csv not found! findUser failed \n");
 		return -1;
 	}
+	int k=0;
 	char trash[LENGTH_MAX];
 	int ord;
 	char name_temp[LENGTH_MAX];
@@ -125,13 +158,12 @@ int findReaderByName(char* name, FILE* f) { //tim theo ho ten
 		fscanf(f, "%d,%[^,],%[^,],", &ord, &trash, &name_temp);
 		if (strcmp(name, name_temp) == 0)
 		{
-			rewind(f);
-			return ord;
+			result[k++] = ord;
 		}
 		fscanf(f, "%[^\n]\n", trash);
 	}
 	rewind(f);
-	return -1;
+	return k;
 }
 
 void updateReaderInfo(FILE*& f) {
@@ -141,16 +173,41 @@ void updateReaderInfo(FILE*& f) {
 		return;
 	}
 	rewind(f);
-	int ord;
-	char name[LENGTH_MAX];
-	printf("Nhap ho ten doc gia can thay doi thong tin: ");
-	std::cin.ignore();
-	fgets(name, sizeof(name), stdin);
-	fflush(stdin);
-	name[strlen(name) - 1] = '\0';
-	ord = findReaderByName(name, f);
-	readReader(r, ord, f);
-	int choice;
+	//int ord;
+	//char name[LENGTH_MAX];
+	//printf("Nhap ho ten doc gia can thay doi thong tin: ");
+	//std::cin.ignore();
+	//fgets(name, sizeof(name), stdin);
+	//fflush(stdin);
+	//name[strlen(name) - 1] = '\0';
+	//ord = findReaderByName(name, f);
+	//readReader(r, ord, f);
+	int choice=0;
+	if (r.name != NULL)
+	{
+		// code ham delete r hien tai dum
+	}
+	while (r.name == NULL) {
+		printf("Vui long lua chon doc gia de thay doi thong tin bang cac cach sau :\n");
+		printf("(1) Chon doc gia dua vao Ho ten \n");
+		printf("(2) CHon doc gia du vao so CMND \n");
+		scanf("%d", &choice);
+		switch (choice)
+		{
+		case 1: {
+			findReaderByName_interface(f);
+			break;
+		}
+		case 2: {
+			findReaderByIdenNumb_interface(f);
+			break;
+		}
+		default:
+			break;
+		}
+
+	}
+
 	do {
 		printf("Thong tin cua doc gia: %s\n", r.name);
 		printf("1. Ho ten        : %s\n", r.name);
@@ -282,16 +339,113 @@ void createReader(FILE*& f) {
 	}
 	printf("Nhap ho ten: "); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, r_add.name);
 	printf("Nhap CMND: "); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, r_add.identify_numb);
-	printf("Nhap ngay sinh : "); scanf("%[^\n]%*c", temp_string); r_add.birth = convertStringtoDate(temp_string);
-	printf("Nhap gioi tinh ( 0- Nu / 1 - Nam) : "); scanf("%d", &r_add.sex);
+	printf("Nhap ngay sinh \n");
+	printf("Ngay: ");
+	scanf("%d", &r_add.birth.d);
+	printf("Thang: ");
+	scanf("%d", &r_add.birth.m);
+	printf("Nam: ");
+	scanf("%d", &r_add.birth.y);	
+	printf("Nhap gioi tinh ( 0- Nu / 1 - Nam) : "); scanf("%d", &r_add.sex); cin.ignore();
 	printf("Nhap email: "); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, r_add.email);
 	printf("Nhap dia chi: "); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, r_add.address);
-	printf("Nhap ngay lap the: "); scanf("%[^\n]%*c", temp_string); r_add.mfg = convertStringtoDate(temp_string);
-	printf("Nhap ngay het han the: "); scanf("%[^\n]%*c", temp_string); r_add.exp = convertStringtoDate(temp_string);
+	printf("Nhap ngay lap the: \n"); 	
+	printf("Ngay: ");
+	scanf("%d", &r_add.mfg.d);
+	printf("Thang: ");
+	scanf("%d", &r_add.mfg.m);
+	printf("Nam: ");
+	scanf("%d", &r_add.mfg.y);
+	printf("Nhap ngay het han the: \n"); 
+	printf("Ngay: ");
+	scanf("%d", &r_add.exp.d);
+	printf("Thang: ");
+	scanf("%d", &r_add.exp.m);
+	printf("Nam: ");
+	scanf("%d", &r_add.exp.y);
 	r_add.ord_numb = n + 1;
 	writeReader(r_add, f);
-	fseek(f, 0, SEEK_SET);
-	fprintf(f, "%d", n + 1);
+	//fseek(f, 0, SEEK_SET);
+	//fprintf(f, "%d", n + 1);
 	printf("\nDa tao doc gia co ma doc gia: %s\n", r_add.ID);
 	rewind(f);
+}
+
+void readReader_all(FILE* f) {
+	if (f == NULL)
+	{
+		printf(".csv not found! ReadCSV failed \n");
+		return;
+	}
+	Reader r;
+	char temp[LENGTH_MAX];
+	int n; 
+	rewind(f);
+	fscanf(f, "%d", &n); // dong da`u
+	printf("%3s|%10s|%25s|%12s|%12s|%3s|%25s|%22s|%12s|%12s|\n","STT","Ma doc gia", "Ho ten", "CMND","Ngay sinh","Sex","Email","Dia chi","Ngay lap the","Ngay het han");
+	for (int i = 1; i <= n ; i++)
+	{
+		fscanf(f, "%d,", &r.ord_numb);
+		fscanf(f, "%[^,],", &temp);
+		copyString_statictodynamic(temp, r.ID);
+		fscanf(f, "%[^,],", &temp);
+		copyString_statictodynamic(temp, r.name);
+		fscanf(f, "%[^,],", &temp);
+		copyString_statictodynamic(temp, r.identify_numb);
+		fscanf(f, "%[^,],", &temp);
+		r.birth = convertStringtoDate(temp);
+		fscanf(f, "%d,", &r.sex);
+		fscanf(f, "%[^,],", &temp);
+		copyString_statictodynamic(temp, r.email);
+		fscanf(f, "%[^,],", &temp);
+		copyString_statictodynamic(temp, r.address);
+		fscanf(f, "%[^,],", &temp);
+		r.mfg = convertStringtoDate(temp);
+		fscanf(f, "%[^\n]\n", &temp);
+		r.exp = convertStringtoDate(temp);
+		outputReader(r);
+	}
+	rewind(f);
+}
+
+void outputReader(Reader& r)
+{
+	printf("%3d|", r.ord_numb);
+	printf("%10d|", r.ID);
+	printf("%25s|", r.name);
+	printf("%12s|", r.identify_numb);
+	char* date_string = convertDatetoString(r.birth);
+	printf("%12s|", date_string);
+	if (r.sex)
+		printf("%3s|","nam");
+	else
+		printf("%3s|","nu");
+	printf("%25s|", r.email);
+	printf("%22s|", r.address);
+	date_string = convertDatetoString(r.mfg);
+	printf("%12s|", date_string);
+	date_string = convertDatetoString(r.exp);
+	printf("%12s|", date_string);
+	printf("\n");
+}
+
+void readReader_array(FILE* f, int* ord, Reader* arr,int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		readReader(arr[i], ord[i], f);
+	}
+}
+
+int chooseReader(Reader* arr,int n)
+{
+	int choice;
+	printf("Chon cac doc gia sau day :\n");
+	for (int i = 0; i < n; i++)
+	{
+		printf("(%d)", i);
+		outputReader(arr[i]);
+	}
+	scanf("%d", &choice);
+	return choice;
 }
