@@ -55,8 +55,11 @@ void writeReader(Reader& r, FILE*& f) {
 		line++;
 		if (line == r.ord_numb)
 		{
-			fprintf(temp_f, "%d,%s,%s,%s,%d/%d/%d,%d,%s,%s,%d/%d/%d,%d/%d/%d\n"
-				, r.ord_numb, r.ID, r.name, r.identify_numb, r.birth.d, r.birth.m, r.birth.y, r.sex, r.email, r.address, r.mfg.d, r.mfg.m, r.mfg.y, r.exp.d, r.exp.m, r.exp.y);
+			char* birth_string = convertDatetoString(r.birth);
+			char* mfg_string = convertDatetoString(r.mfg);
+			char* exp_string = convertDatetoString(r.exp);
+			fprintf(temp_f, "%d,%s,%s,%s,%s,%d,%s,%s,%s,%s\n"
+				, r.ord_numb, r.ID, r.name, r.identify_numb, birth_string, r.sex, r.email, r.address, mfg_string,exp_string);
 		}
 		else
 		{
@@ -67,8 +70,11 @@ void writeReader(Reader& r, FILE*& f) {
 		line++;
 		if (line == r.ord_numb)
 		{
-			fprintf(temp_f, "%d,%s,%s,%s,%d/%d/%d,%d,%s,%s,%d/%d/%d,%d/%d/%d\n"
-				, r.ord_numb, r.ID, r.name, r.identify_numb, r.birth.d, r.birth.m, r.birth.y, r.sex, r.email, r.address, r.mfg.d, r.mfg.m, r.mfg.y, r.exp.d, r.exp.m, r.exp.y);
+			char* birth_string = convertDatetoString(r.birth);
+			char* mfg_string = convertDatetoString(r.mfg);
+			char* exp_string = convertDatetoString(r.exp);
+			fprintf(temp_f, "%d,%s,%s,%s,%s,%d,%s,%s,%s,%s\n"
+				, r.ord_numb, r.ID, r.name, r.identify_numb, birth_string, r.sex, r.email, r.address, mfg_string, exp_string);
 		}
 		else
 		{
@@ -185,7 +191,18 @@ void updateReaderInfo(FILE*& f) {
 	int choice=0;
 	if (r.name != NULL)
 	{
-		// code ham delete r hien tai dum
+		printf("Ban co muon tiep tuc chinh sua thong tin doc gia da chon khong?(0 - no)(1 - yes)\n");
+		scanf("%d", &choice);
+		switch (choice)
+		{
+		case 0:
+		{
+			freeReader();
+			break;
+		}
+		default:
+			break;
+		}
 	}
 	while (r.name == NULL) {
 		printf("Vui long lua chon doc gia de thay doi thong tin bang cac cach sau :\n");
@@ -448,4 +465,13 @@ int chooseReader(Reader* arr,int n)
 	}
 	scanf("%d", &choice);
 	return choice;
+}
+
+void freeReader()
+{
+	free(r.ID);
+	free(r.name);
+	free(r.identify_numb);
+	free(r.email);
+	free(r.address);
 }

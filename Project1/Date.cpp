@@ -11,7 +11,7 @@ char* convertDatetoString(Date d)
 {
 	char* str = new char[11];
 	char* temp;
-	if(d.d>10)
+	if(d.d>=10)
 		str = _itoa(d.d,str,10);
 	else
 	{
@@ -20,7 +20,7 @@ char* convertDatetoString(Date d)
 		temp = _itoa(d.d, temp, 10);
 	}
 	str[2] = '/';
-	if (d.m > 10)
+	if (d.m >= 10)
 	{
 		temp = str + 3;
 		temp = _itoa(d.m, temp, 10);

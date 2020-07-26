@@ -33,3 +33,5 @@ void outputReader(Reader& r);
 void readReader_array(FILE* f, int* ord, Reader* arr, int n);
 
 int chooseReader(Reader* arr, int n);
+
+void freeReader();
