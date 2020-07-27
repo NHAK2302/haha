@@ -12,7 +12,7 @@ struct Reader {
 
 void readReader(Reader& r, int ord, FILE* f);
 
-int findReaderByIdenNumb(char* ID, FILE* f,int* result);
+int findReaderByIdenNumb(char* ID, FILE* f, int* result);
 
 void writeReader(Reader& r, FILE*& f);
 

@@ -197,7 +197,7 @@ void func2() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //xem list reader
+					//xem list reader
 					readReader_all(fReader);
 					system("pause");
 					break;
@@ -210,7 +210,7 @@ void func2() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //add reader
+					//add reader
 					createReader(fReader);
 					system("pause");
 					break;
@@ -266,7 +266,7 @@ void func2() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //find books by full name
+					printf("Chua co ham\n"); //find reader by full name
 					findReaderByName_interface(fReader);
 					system("pause");
 					break;
@@ -344,7 +344,8 @@ void func3() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //show list of books
+					//show list of books
+					readBook_all(fBook);
 					system("pause");
 					break;
 				}
@@ -361,7 +362,8 @@ void func3() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //add book
+					//add book
+					createBook(fBook);
 					system("pause");
 					break;
 				}
@@ -378,7 +380,8 @@ void func3() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //update book's info
+					//update book's info
+					updateBookInfo(fBook);
 					system("pause");
 					break;
 				}
@@ -395,7 +398,8 @@ void func3() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //remove book's info
+					//remove book's info
+					deleteBook_interface(fBook);
 					system("pause");
 					break;
 				}
@@ -407,7 +411,8 @@ void func3() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //find books by ISBN
+					//find books by ISBN
+					findBookByISBN_interface(fBook);
 					system("pause");
 					break;
 				}
@@ -419,7 +424,8 @@ void func3() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //find books by book's name
+					//find books by book's name
+					findBookByName_interface(fBook);
 					system("pause");
 					break;
 				}

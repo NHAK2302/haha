@@ -311,7 +311,7 @@ void createReader(FILE*& f) {
 	Reader r_add, r_temp;
 	fscanf(f, "%d\n", &n);
 	printf("Nhap ma doc gia : ");
-	std::cin.ignore();
+	cin.ignore();
 	scanf("%[^\n]%*c", temp_string);
 	copyString_statictodynamic(temp_string, r_add.ID);
 	for (int i = 1; i <= n; i++) {
@@ -414,7 +414,7 @@ void outputReader(Reader& r)
 	printf("\n");
 }
 
-void readReader_array(FILE* f, int* ord, Reader* arr,int n)
+void readReader_array(FILE* f, int* ord, Reader* arr, int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -422,7 +422,7 @@ void readReader_array(FILE* f, int* ord, Reader* arr,int n)
 	}
 }
 
-int chooseReader(Reader* arr,int n)
+int chooseReader(Reader* arr, int n)
 {
 	int choice;
 	printf("Chon cac doc gia sau day :\n");
@@ -449,7 +449,7 @@ void deleteReader_interface(FILE* f)
 	fillReader(r,f);
 	deleteReader(r, f);
 	freeReader();
-	printf("Xoa nguoi dung thanh cong !\n");
+	printf("Xoa doc gia thanh cong!\n");
 }
 
 void deleteReader(Reader r,FILE* f)
@@ -522,7 +522,7 @@ void fillReader(Reader& r,FILE* f)
 	while (r.name == NULL) {
 		printf("Vui long lua chon doc gia de tiep tuc bang cac cach sau :\n");
 		printf("(1) Chon doc gia dua vao Ho ten \n");
-		printf("(2) CHon doc gia du vao so CMND \n");
+		printf("(2) CHon doc gia dua vao so CMND \n");
 		scanf("%d", &choice);
 		switch (choice)
 		{
@@ -540,5 +540,3 @@ void fillReader(Reader& r,FILE* f)
 
 	}
 }
-
-
