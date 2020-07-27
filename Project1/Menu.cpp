@@ -241,7 +241,7 @@ void func2() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //remove reader's info
+					deleteReader_interface(fReader);
 					system("pause");
 					break;
 				}

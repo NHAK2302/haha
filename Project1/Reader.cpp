@@ -133,26 +133,27 @@ void findReaderByIdenNumb_interface(FILE* f)
 void findReaderByName_interface(FILE* f)
 {
 	char name[LENGTH_MAX];
-	int ord[100],n,choice; // 100 thang trung ten nhau la het co~
+	int ord[100], n, choice; // 100 thang trung ten nhau la het co~
 	Reader rArray[100];
 	printf("Nhap ho ten nguoi doc :"); cin.ignore(); scanf("%[^\n]%*c", name);
-	if ((n=findReaderByName(name, f, ord)) <= 0)
+	if ((n = findReaderByName(name, f, ord)) <= 0)
 	{
 		printf("Khong tim thay doc gia!");
 		return;
 	}
-	readReader_array(f, ord, rArray,n);
+	readReader_array(f, ord, rArray, n);
 	choice = chooseReader(rArray, n);
 	readReader(r, ord[choice], f);
 }
 
-int findReaderByName(char* name, FILE* f,int* result) { //tim theo ho ten, tra ve so ket qua?
+int findReaderByName(char* name, FILE* f, int* result)
+{ //tim theo ho ten, tra ve so ket qua?
 	if (f == NULL)
 	{
 		printf(".csv not found! findUser failed \n");
 		return -1;
 	}
-	int k=0;
+	int k = 0;
 	char trash[LENGTH_MAX];
 	int ord;
 	char name_temp[LENGTH_MAX];
@@ -172,7 +173,8 @@ int findReaderByName(char* name, FILE* f,int* result) { //tim theo ho ten, tra v
 	return k;
 }
 
-void updateReaderInfo(FILE*& f) {
+void updateReaderInfo(FILE*& f)
+{
 	if (f == NULL)
 	{
 		printf(".csv not found! writeUser failed \n");
@@ -188,42 +190,8 @@ void updateReaderInfo(FILE*& f) {
 	//name[strlen(name) - 1] = '\0';
 	//ord = findReaderByName(name, f);
 	//readReader(r, ord, f);
-	int choice=0;
-	if (r.name != NULL)
-	{
-		printf("Ban co muon tiep tuc chinh sua thong tin doc gia da chon khong?(0 - no)(1 - yes)\n");
-		scanf("%d", &choice);
-		switch (choice)
-		{
-		case 0:
-		{
-			freeReader();
-			break;
-		}
-		default:
-			break;
-		}
-	}
-	while (r.name == NULL) {
-		printf("Vui long lua chon doc gia de thay doi thong tin bang cac cach sau :\n");
-		printf("(1) Chon doc gia dua vao Ho ten \n");
-		printf("(2) CHon doc gia du vao so CMND \n");
-		scanf("%d", &choice);
-		switch (choice)
-		{
-		case 1: {
-			findReaderByName_interface(f);
-			break;
-		}
-		case 2: {
-			findReaderByIdenNumb_interface(f);
-			break;
-		}
-		default:
-			break;
-		}
-
-	}
+	int choice = 0;
+	fillReader(r, f);
 
 	do {
 		printf("Thong tin cua doc gia: %s\n", r.name);
@@ -475,3 +443,102 @@ void freeReader()
 	free(r.email);
 	free(r.address);
 }
+
+void deleteReader_interface(FILE* f)
+{
+	fillReader(r,f);
+	deleteReader(r, f);
+	freeReader();
+	printf("Xoa nguoi dung thanh cong !\n");
+}
+
+void deleteReader(Reader r,FILE* f)
+{
+	if (f == NULL)
+	{
+		printf(".csv not found! writeUser failed \n");
+		return;
+	}
+	rewind(f);
+	char temp_string[LENGTH_MAX * 4] = "\0";
+	FILE* temp_f = fopen("temp.txt", "w+");
+	int line = 0; int ord;
+	int n; fscanf(f, "%d\n", &n);
+	n--;
+	fprintf(temp_f, "%d\n", n);
+	while (!feof(f)) {
+		fscanf(f, "%d,%[^\n]\n",&ord, temp_string);
+		line++;
+		if (line == r.ord_numb)
+		{
+			line--;
+			continue;
+		}
+		else
+		{
+			fprintf(temp_f, "%d,%s\n",line, temp_string);
+		}
+	}
+	//while (line < r.ord_numb) {
+	//	line++;
+	//	if (line == r.ord_numb)
+	//	{
+	//		char* birth_string = convertDatetoString(r.birth);
+	//		char* mfg_string = convertDatetoString(r.mfg);
+	//		char* exp_string = convertDatetoString(r.exp);
+	//		fprintf(temp_f, "%d,%s,%s,%s,%s,%d,%s,%s,%s,%s\n"
+	//			, r.ord_numb, r.ID, r.name, r.identify_numb, birth_string, r.sex, r.email, r.address, mfg_string, exp_string);
+	//	}
+	//	else
+	//	{
+	//		fprintf(temp_f, "\n");
+	//	}
+	//}
+	fclose(f);
+	fclose(temp_f);
+	remove(fREADER);
+	rename("temp.txt", fREADER);
+	f = fopen(fREADER, "r");
+}
+
+void fillReader(Reader& r,FILE* f)
+{
+	int choice = 0;
+	if (r.name != NULL)
+	{
+		printf("Ban co muon tiep tuc chinh sua thong tin doc gia da chon khong?(0 - no)(1 - yes)\n");
+		scanf("%d", &choice);
+		switch (choice)
+		{
+		case 0:
+		{
+			freeReader();
+			break;
+		}
+		default:
+			break;
+		}
+	}
+	while (r.name == NULL) {
+		printf("Vui long lua chon doc gia de tiep tuc bang cac cach sau :\n");
+		printf("(1) Chon doc gia dua vao Ho ten \n");
+		printf("(2) CHon doc gia du vao so CMND \n");
+		scanf("%d", &choice);
+		switch (choice)
+		{
+		case 1: {
+			findReaderByName_interface(f);
+			break;
+		}
+		case 2: {
+			findReaderByIdenNumb_interface(f);
+			break;
+		}
+		default:
+			break;
+		}
+
+	}
+}
+
+
