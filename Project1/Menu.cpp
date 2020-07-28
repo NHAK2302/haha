@@ -8,6 +8,8 @@ int func;
 FILE* fUser = fopen(fUSER,"r+t");
 FILE* fReader = fopen(fREADER, "r+t");
 FILE* fBook = fopen(fBOOK, "r+t");
+FILE* fBorrow = fopen(fBORROW, "r+t");
+FILE* fReturn = fopen(fRETURN, "r+t");
 void func1() {
 	do {
 		system("cls");

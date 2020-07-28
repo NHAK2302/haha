@@ -9,13 +9,6 @@ struct Book {
 	int pub_year, price, amount, ord_numb;
 };
 
-struct Note {
-	char* reader_ID;
-	Date bor_date, expe_date, real_date;
-	int numb;
-	char* listISBN[];
-};
-
 int findBookByISBN(char* ISBN, FILE* f, int* result);
 
 int findBookByName(char* name, FILE* f, int* result);
