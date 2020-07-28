@@ -66,7 +66,7 @@ int findUser(char* name,FILE* f) //tra ve number(STT), -1 la khong tim thay
 	for (int i = 1; i <= n; i++)
 	{
 		fscanf(f, "%d,%[^,],", &ord, &name_temp);
-		if (strcmp(name, name_temp) == 0)
+		if (_stricmp(name, name_temp) == 0)
 		{
 			rewind(f);
 			return ord;
@@ -93,7 +93,7 @@ int checkpassUser(int ord,char* pass, FILE* f) //chua xong
 		fscanf(f, "%[^\n]\n", trash);
 	}
 	fscanf(f, "%[^,],%[^,],%[^,]", &trash, &trash, &pass_legit);
-	if (strcmp(pass_legit, pass) == 0)
+	if (_stricmp(pass_legit, pass) == 0)
 	{
 		rewind(f);
 		return 1;
@@ -294,7 +294,7 @@ void updateUser_pass(FILE* &f) { //con 1 ty bug
 	printf("Nhap mat khau hien tai: ");
 	scanf("%s", &temp_string);
 	
-	while (strcmp(temp_string,u.password)!=0)
+	while (_stricmp(temp_string,u.password)!=0)
 	{
 		printf("Sai mat khau!\n");
 		printf("Ban co muon nhap lai mat khau? (1 : co / 0 : khong) : ");
@@ -361,7 +361,7 @@ void createUser( FILE*& f) {
 	copyString_statictodynamic(temp_string, u_add.ID);
 	for (int i = 1; i <= n; i++) {
 		readUser(u_temp, i, f);
-		if (strcmp(u_temp.ID, u_add.ID) == 0) {
+		if (_stricmp(u_temp.ID, u_add.ID) == 0) {
 			printf("Nguoi dung nay ton tai!\n");
 			return;
 		}

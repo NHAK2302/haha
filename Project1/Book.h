@@ -1,7 +1,6 @@
 #pragma once
 #include "Date.h"
 #include <iostream>
-#include <stdio.h>
 #include "DynamicCString.h"
 #define fBOOK "book.csv"
 using namespace std;
@@ -11,7 +10,7 @@ struct Book {
 };
 
 struct Note {
-	char* ID;
+	char* reader_ID;
 	Date bor_date, expe_date, real_date;
 	int numb;
 	char* listISBN[];

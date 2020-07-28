@@ -17,7 +17,7 @@ int findBookByISBN(char* ISBN, FILE* f, int* result) { // tim sach theo ISBN
 	for (int i = 1; i <= n; i++)
 	{
 		fscanf(f, "%d,%[^,],", &ord, &ISBN_temp);
-		if (strcmp(ISBN, ISBN_temp) == 0)
+		if (_stricmp(ISBN, ISBN_temp) == 0)
 		{
 			result[k++] = ord;
 		}
@@ -43,7 +43,7 @@ int findBookByName(char* name, FILE* f, int* result) {
 	for (int i = 1; i <= n; i++)
 	{
 		fscanf(f, "%d,%[^,],%[^,],", &ord, &trash, &name_temp);
-		if (strcmp(name, name_temp) == 0)
+		if (_stricmp(name, name_temp) == 0)
 		{
 			result[k++] = ord;
 		}
@@ -280,7 +280,7 @@ void createBook(FILE*& f) {
 	copyString_statictodynamic(temp_string, b_add.ISBN);
 	for (int i = 1; i <= n; i++) {
 		readBook(b_temp, i, f);
-		if (strcmp(b_temp.ISBN, b_add.ISBN) == 0) {
+		if (_stricmp(b_temp.ISBN, b_add.ISBN) == 0) {
 			printf("Nguoi dung nay ton tai!\n");
 			return;
 		}
@@ -308,15 +308,15 @@ void readBook_array(FILE* f, int* ord, Book* arr, int n) {
 }
 
 void outputBook(Book& b) {
-	printf("%3s|", b.ord_numb);
+	printf("%3d|", b.ord_numb);
 	printf("%10s|", b.ISBN);
 	printf("%30s|", b.name);
 	printf("%25s|", b.author);
 	printf("%20s|", b.pub_company);
-	printf("%12s|", b.pub_year);
+	printf("%12d|", b.pub_year);
 	printf("%12s|", b.type);
-	printf("%10s|", b.price);
-	printf("%9s|", b.amount);
+	printf("%10d|", b.price);
+	printf("%9d|", b.amount);
 	printf("\n");
 }
 

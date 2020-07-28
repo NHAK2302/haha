@@ -104,7 +104,7 @@ int findReaderByIdenNumb(char* ID, FILE* f,int* result) { //tim theo CMND, tra v
 	for (int i = 1; i <= n; i++)
 	{
 		fscanf(f, "%d,%[^,],%[^,],%[^,],", &ord, &trash, &trash, &ID_temp);
-		if (strcmp(ID, ID_temp) == 0)
+		if (_stricmp(ID, ID_temp) == 0)
 		{
 			result[k++] = ord;
 		}
@@ -163,7 +163,7 @@ int findReaderByName(char* name, FILE* f, int* result)
 	for (int i = 1; i <= n; i++)
 	{
 		fscanf(f, "%d,%[^,],%[^,],", &ord, &trash, &name_temp);
-		if (strcmp(name, name_temp) == 0)
+		if (_stricmp(name, name_temp) == 0)
 		{
 			result[k++] = ord;
 		}
@@ -316,7 +316,7 @@ void createReader(FILE*& f) {
 	copyString_statictodynamic(temp_string, r_add.ID);
 	for (int i = 1; i <= n; i++) {
 		readReader(r_temp, i, f);
-		if (strcmp(r_temp.ID, r_add.ID) == 0) {
+		if (_stricmp(r_temp.ID, r_add.ID) == 0) {
 			printf("Nguoi dung nay da ton tai!\n");
 			return;
 		}
