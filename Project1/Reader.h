@@ -14,11 +14,11 @@ void readReader(Reader& r, int ord, FILE* f);
 
 int findReaderByIdenNumb(char* ID, FILE* f, int* result);
 
+void findReaderByIdenNumb_interface(Reader& r, FILE* f);
+
+void findReaderByName_interface(Reader& r, FILE* f);
+
 void writeReader(Reader& r, FILE*& f);
-
-void findReaderByIdenNumb_interface(FILE* f);
-
-void findReaderByName_interface(FILE* f);
 
 int findReaderByName(char* name, FILE* f, int* result);
 

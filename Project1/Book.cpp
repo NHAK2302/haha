@@ -363,7 +363,7 @@ void readBook_all(FILE* f) {
 	rewind(f);
 }
 
-void findBookByISBN_interface(FILE* f) {
+void findBookByISBN_interface(Book& b,FILE* f) {
 	char ISBN_numb[LENGTH_MAX];
 	int ord[100], n, choice; // 100 thang trung ten nhau la het co~
 	Book bArray[100];
@@ -378,7 +378,7 @@ void findBookByISBN_interface(FILE* f) {
 	readBook(b, ord[choice], f);
 }
 
-void findBookByName_interface(FILE* f) {
+void findBookByName_interface(Book& b, FILE* f) {
 	char name[LENGTH_MAX];
 	int ord[100], n, choice; // 100 thang trung ten nhau la het co~
 	Book bArray[100];
@@ -405,7 +405,7 @@ void fillBook(Book& b, FILE* f) {
 	int choice = 0;
 	if (b.name != NULL)
 	{
-		printf("Ban co muon tiep tuc chinh sua thong tin doc gia da chon khong?(0 - no)(1 - yes)\n");
+		printf("Ban co muon tiep tuc thao tac sa'ch da chon khong?(0 - no)(1 - yes)\n");
 		scanf("%d", &choice);
 		switch (choice)
 		{
@@ -426,11 +426,11 @@ void fillBook(Book& b, FILE* f) {
 		switch (choice)
 		{
 		case 1: {
-			findBookByName_interface(f);
+			findBookByName_interface(b,f);
 			break;
 		}
 		case 2: {
-			findBookByISBN_interface(f);
+			findBookByISBN_interface(b,f);
 			break;
 		}
 		default:

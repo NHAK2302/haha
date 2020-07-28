@@ -114,7 +114,7 @@ int findReaderByIdenNumb(char* ID, FILE* f,int* result) { //tim theo CMND, tra v
 	return k;
 }
 
-void findReaderByIdenNumb_interface(FILE* f)
+void findReaderByIdenNumb_interface(Reader& r,FILE* f)
 {
 	char ID_numb[LENGTH_MAX];
 	int ord[100], n, choice; // 100 thang trung ten nhau la het co~
@@ -130,7 +130,7 @@ void findReaderByIdenNumb_interface(FILE* f)
 	readReader(r, ord[choice], f);
 }
 
-void findReaderByName_interface(FILE* f)
+void findReaderByName_interface(Reader& r,FILE* f)
 {
 	char name[LENGTH_MAX];
 	int ord[100], n, choice; // 100 thang trung ten nhau la het co~
@@ -506,7 +506,7 @@ void fillReader(Reader& r,FILE* f)
 	int choice = 0;
 	if (r.name != NULL)
 	{
-		printf("Ban co muon tiep tuc chinh sua thong tin doc gia da chon khong?(0 - no)(1 - yes)\n");
+		printf("Ban co muon tiep tuc thao tac doc gia da chon khong?(0 - no)(1 - yes)\n");
 		scanf("%d", &choice);
 		switch (choice)
 		{
@@ -527,11 +527,11 @@ void fillReader(Reader& r,FILE* f)
 		switch (choice)
 		{
 		case 1: {
-			findReaderByName_interface(f);
+			findReaderByName_interface(r,f);
 			break;
 		}
 		case 2: {
-			findReaderByIdenNumb_interface(f);
+			findReaderByIdenNumb_interface(r,f);
 			break;
 		}
 		default:

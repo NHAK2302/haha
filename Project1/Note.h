@@ -8,5 +8,8 @@ struct Note {
 	char* reader_ID;
 	Date bor_date, expe_date, real_date;
 	int numb;
-	char* listISBN[];
+	int book_number;
+	char** book_ISBN;
 };
+
+void createBorrowNote(FILE* &f);

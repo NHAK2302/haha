@@ -29,9 +29,9 @@ int chooseBook(Book* arr, int n);
 
 void readBook_all(FILE* f);
 
-void findBookByISBN_interface(FILE* f);
+void findBookByISBN_interface(Book& b, FILE* f);
 
-void findBookByName_interface(FILE* f);
+void findBookByName_interface(Book& b, FILE* f);
 
 void freeBook();
 

@@ -1,17 +1,12 @@
-﻿  Book.cpp
-E:\Do an cuoi ki\haha\Project1\Book.h(16,18): warning C4200: nonstandard extension used: zero-sized array in struct/union
-E:\Do an cuoi ki\haha\Project1\Book.h(16,18): message : This member will be ignored by a defaulted constructor or copy/move assignment operator
-E:\Do an cuoi ki\haha\Project1\Book.cpp(118,20): warning C4477: 'fprintf' : format string '%s' requires an argument of type 'char *', but variadic argument 6 has type 'int'
-E:\Do an cuoi ki\haha\Project1\Book.cpp(118,20): warning C4477: 'fprintf' : format string '%d' requires an argument of type 'int', but variadic argument 7 has type 'char *'
-E:\Do an cuoi ki\haha\Project1\Book.cpp(118,20): warning C4473: 'fprintf' : not enough arguments passed for format string
-E:\Do an cuoi ki\haha\Project1\Book.cpp(118,20): message : placeholders and their parameters expect 12 variadic arguments, but 9 were provided
-E:\Do an cuoi ki\haha\Project1\Book.cpp(118,20): message : the missing variadic argument 10 is required by format string '%d'
-  Menu.cpp
-E:\Do an cuoi ki\haha\Project1\Book.h(16,18): warning C4200: nonstandard extension used: zero-sized array in struct/union
-E:\Do an cuoi ki\haha\Project1\Book.h(16,18): message : This member will be ignored by a defaulted constructor or copy/move assignment operator
-  Source.cpp
-E:\Do an cuoi ki\haha\Project1\Book.h(16,18): warning C4200: nonstandard extension used: zero-sized array in struct/union
-E:\Do an cuoi ki\haha\Project1\Book.h(16,18): message : This member will be ignored by a defaulted constructor or copy/move assignment operator
-E:\Do an cuoi ki\haha\Project1\Source.cpp(6,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+﻿  Reader.cpp
+E:\Do an cuoi ki\haha\Project1\Reader.cpp(399,9): warning C4477: 'printf' : format string '%10d' requires an argument of type 'int', but variadic argument 1 has type 'char *'
+  Note.cpp
+E:\Do an cuoi ki\haha\Project1\Note.cpp(71,14): warning C4101: 'n_book': unreferenced local variable
+E:\Do an cuoi ki\haha\Project1\Note.cpp(86,19): warning C4101: 'date_string': unreferenced local variable
+E:\Do an cuoi ki\haha\Project1\Note.cpp(85,7): warning C4101: 'n': unreferenced local variable
+E:\Do an cuoi ki\haha\Project1\Note.cpp(86,7): warning C4101: 'date': unreferenced local variable
+E:\Do an cuoi ki\haha\Project1\Note.cpp(116,15): warning C4477: 'fscanf' : format string '%[^\n]' requires an argument of type 'char *', but variadic argument 1 has type 'char **'
+  User.cpp
+E:\Do an cuoi ki\haha\Project1\User.cpp(87,9): warning C4101: 'status': unreferenced local variable
   Generating Code...
   Project1.vcxproj -> E:\Do an cuoi ki\haha\Debug\Project1.exe

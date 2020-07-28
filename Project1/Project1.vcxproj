@@ -146,6 +146,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="CSVfile.cpp" />
     <ClCompile Include="Note.cpp" />
+    <ClCompile Include="Statistic.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="DynamicCString.cpp" />
   </ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="Note.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Reader.h" />
+    <ClInclude Include="Statistic.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

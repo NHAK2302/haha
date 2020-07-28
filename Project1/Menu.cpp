@@ -2,6 +2,7 @@
 #include "Menu.h"
 extern User u;
 extern Book b;
+extern Reader r;
 int login=0;
 int smallFunc;
 int func;
@@ -256,7 +257,7 @@ void func2() {
 				}
 				else {
 					printf("Chua co ham\n"); //find reader by cmnd
-					findReaderByIdenNumb_interface(fReader);
+					findReaderByIdenNumb_interface(r,fReader);
 					system("pause");
 					break;
 				}
@@ -269,7 +270,7 @@ void func2() {
 				}
 				else {
 					printf("Chua co ham\n"); //find reader by full name
-					findReaderByName_interface(fReader);
+					findReaderByName_interface(r,fReader);
 					system("pause");
 					break;
 				}
@@ -414,7 +415,7 @@ void func3() {
 				}
 				else {
 					//find books by ISBN
-					findBookByISBN_interface(fBook);
+					findBookByISBN_interface(b,fBook);
 					system("pause");
 					break;
 				}
@@ -427,7 +428,7 @@ void func3() {
 				}
 				else {
 					//find books by book's name
-					findBookByName_interface(fBook);
+					findBookByName_interface(b,fBook);
 					system("pause");
 					break;
 				}
@@ -479,7 +480,7 @@ void func4() {
 		}
 	}
 	printf("=======================================================================================================================\n\n\n");
-	printf("do something ....\n"); //lap phieu muon sach
+	createBorrowNote(fBorrow);
 	system("pause");
 	return;
 }
