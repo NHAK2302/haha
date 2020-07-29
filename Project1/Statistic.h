@@ -12,10 +12,10 @@ int numbOfBooks_all(FILE* f);
 
 void numbOfBooks_type(FILE* f);
 
-bool typeNotExist(char* typeArr[], int n, char* cur_type);
-
-void typeOfBooks(FILE* f, char* typeArr[], int& amount);
+bool typeNotExist(char typeArr[100][LENGTH_MAX], int n, char* cur_type);
 
 int numbOfReaders_all(FILE* f);
 
 void numbOfReaders_sex(FILE* f);
+
+int numbOfBooks_borrowed(FILE* f1, FILE* f2);

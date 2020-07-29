@@ -13,6 +13,8 @@ int findBookByISBN(char* ISBN, FILE* f, int* result);
 
 int findBookByName(char* name, FILE* f, int* result);
 
+int findBookByType(char* type, FILE* f, int* result);
+
 void readBook(Book& b, int ord, FILE* f);
 
 void writeBook(Book& b, FILE*& f);

@@ -53,6 +53,32 @@ int findBookByName(char* name, FILE* f, int* result) {
 	return k;
 }
 
+int findBookByType(char* type, FILE* f, int* result) {
+	if (f == NULL)
+	{
+		printf(".csv not found! findUser failed \n");
+		return -1;
+	}
+	int k = 0;
+	char trash[LENGTH_MAX];
+	int ord;
+	char type_temp[LENGTH_MAX];
+	rewind(f);
+	int n;
+	fscanf(f, "%d\n", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		fscanf(f, "%d,%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],", &ord, &trash, &trash, &trash, &trash, &trash, &type_temp);
+		if (_stricmp(type, type_temp) == 0)
+		{
+			result[k++] = ord;
+		}
+		fscanf(f, "%[^\n]\n", trash);
+	}
+	rewind(f);
+}
+
+
 void readBook(Book& b, int ord, FILE* f) {
 	if (f == NULL)
 	{
