@@ -521,7 +521,7 @@ void func5() {
 		}
 	}
 	printf("=======================================================================================================================\n\n\n");
-	printf("do something ....\n"); //lap phieu tra sach
+	createReturnNote(fReturn);
 	system("pause");
 	return;
 }

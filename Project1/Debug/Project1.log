@@ -1,12 +1,5 @@
-﻿  Reader.cpp
-E:\Do an cuoi ki\haha\Project1\Reader.cpp(399,9): warning C4477: 'printf' : format string '%10d' requires an argument of type 'int', but variadic argument 1 has type 'char *'
-  Note.cpp
+﻿  Note.cpp
 E:\Do an cuoi ki\haha\Project1\Note.cpp(71,14): warning C4101: 'n_book': unreferenced local variable
-E:\Do an cuoi ki\haha\Project1\Note.cpp(86,19): warning C4101: 'date_string': unreferenced local variable
-E:\Do an cuoi ki\haha\Project1\Note.cpp(85,7): warning C4101: 'n': unreferenced local variable
 E:\Do an cuoi ki\haha\Project1\Note.cpp(86,7): warning C4101: 'date': unreferenced local variable
-E:\Do an cuoi ki\haha\Project1\Note.cpp(116,15): warning C4477: 'fscanf' : format string '%[^\n]' requires an argument of type 'char *', but variadic argument 1 has type 'char **'
-  User.cpp
-E:\Do an cuoi ki\haha\Project1\User.cpp(87,9): warning C4101: 'status': unreferenced local variable
-  Generating Code...
+E:\Do an cuoi ki\haha\Project1\Note.cpp(166,9): warning C4101: 'rArray': unreferenced local variable
   Project1.vcxproj -> E:\Do an cuoi ki\haha\Debug\Project1.exe

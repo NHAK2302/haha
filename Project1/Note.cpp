@@ -1,7 +1,7 @@
 #include"Note.h"
 extern FILE* fReader;
 extern FILE* fBook;
-
+extern FILE* fBorrow;
 void createBorrowNote(FILE*& f)
 {
 	if (f == NULL)
@@ -84,14 +84,42 @@ void createReturnNote(FILE*& f)
 	}
 	Note n;
 	Date date; char* date_string;
-
+	printf("Lap phieu tra sach dua tren phieu muon sach co tu truoc :\n");
+	fillNote(n, fBorrow);
+	fprintf(temp_f, "%s,", n.reader_ID);
+	date_string = convertDatetoString(n.bor_date);
+	fprintf(temp_f, "%s,", date_string);
+	date_string = convertDatetoString(n.expe_date);
+	fprintf(temp_f, "%s,", date_string);
+	printf("Nhap ngay tra sach :\n");
+	printf("Ngay: ");
+	scanf("%d", &n.real_date.d);
+	printf("Thang: ");
+	scanf("%d", &n.real_date.m);
+	printf("Nam: ");
+	scanf("%d", &n.real_date.y);
+	date_string = convertDatetoString(n.real_date);
+	fprintf(temp_f, "%s,", date_string);
+	fprintf(temp_f, "%d\n", n.book_number);
+	for (int i = 0; i < n.book_number; i++)
+	{
+		fprintf(temp_f,"%s\n", n.book_ISBN[i]);
+	}
+	if (checkdate(n.real_date, n.expe_date))
+	{
+		fprintf(temp_f,"1\n");
+	}
+	else
+	{
+		fprintf(temp_f,"0\n");
+	}
 	fclose(f);
 	fclose(temp_f);
-	remove(fBORROW);
-	rename("temp.txt", fBORROW);
-	f = fopen(fBORROW, "r+t");
+	remove(fRETURN);
+	rename("temp.txt", fRETURN);
+	f = fopen(fRETURN, "r+t");
 }
-int findNote(char* name,FILE* f,Note* &result)
+int findNote(char* name,FILE* f,Note* result)
 {
 	if (f == NULL) 
 	{
@@ -102,19 +130,22 @@ int findNote(char* name,FILE* f,Note* &result)
 	Note check;
 	int k=0;
 	char trash[LENGTH_MAX * 4];
-	char name_temp[LENGTH_MAX];
+	char ID_temp[LENGTH_MAX];
 	int n;
 	fscanf(f, "%d\n", &n);
 	for (int i = 1; i <= n; i++)
 	{
-		fscanf(f, "%[^,],%d/%d/%d,%d/%d/%d,%d\n", check.reader_ID, &check.bor_date.d, &check.bor_date.m, &check.bor_date.y, &check.expe_date.d, &check.expe_date.m, &check.expe_date.y, &check.book_number);
-		if (_stricmp(name, name_temp) == 0)
+		fscanf(f, "%[^,],%d/%d/%d,%d/%d/%d,%d\n", ID_temp, &check.bor_date.d, &check.bor_date.m, &check.bor_date.y, &check.expe_date.d, &check.expe_date.m, &check.expe_date.y, &check.book_number);
+
+		if (_stricmp(name, ID_temp) == 0)
 		{
+			copyString_statictodynamic(ID_temp, check.reader_ID);
 			result[k] = check;
 			result[k].book_ISBN = (char**)calloc(check.book_number, sizeof(char*));
-			for (int j = 0; i < check.book_number ; i++)
+			for (int j = 0; j < check.book_number ; j++)
 			{
-				fscanf(f, "%[^\n]\n", &result[k].book_ISBN[j]);
+				fscanf(f, "%[^\n]\n", trash);
+				copyString_statictodynamic(trash, result[k].book_ISBN[j]);
 			}
 			k++;
 		}
@@ -127,4 +158,42 @@ int findNote(char* name,FILE* f,Note* &result)
 		}
 	}
 	return k;
+}
+void fillNote(Note& n,FILE*f)
+{
+	char name[LENGTH_MAX];
+	Note arr[100];int k, choice; // 100 thang trung ten nhau la het co~
+	Reader rArray[100];
+	printf("Nhap ma doc gia muon lap phieu tra sach :"); cin.ignore(); scanf("%[^\n]%*c", name);
+	if ((k = findNote(name,f,arr)) <= 0)
+	{
+		printf("Khong tim thay phieu muon sach tu doc gia nay!");
+		return;
+	}
+	readNote_array(arr, k);
+	choice = chooseNote(arr, k);
+	n = arr[choice];
+}
+void readNote_array(Note* arr,int n)
+{
+	char* temp_string=NULL;
+	for (int i = 0; i < n; i++)
+	{
+		temp_string = convertDatetoString(arr[i].bor_date);
+		printf("(%d)\nMa doc gia : %s\nNgay muon sach : %s\tNgay du kien tra sach: ",i,arr[i].reader_ID,temp_string);
+		temp_string = convertDatetoString(arr[i].expe_date);
+		printf("%s,so sach muon : %d \n", temp_string,arr[i].book_number);
+		for (int j = 0; j < arr[i].book_number; j++)
+		{
+			printf("%s\n", arr[i].book_ISBN[j]);
+		}
+	}
+	free((void*)temp_string);
+}
+int chooseNote(Note* arr, int n)
+{
+	int result;
+	printf("Chon phieu muon sach tuong ung de tiep tuc :");
+	scanf("%d", &result);
+	return result;
 }
