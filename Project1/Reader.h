@@ -3,6 +3,7 @@
 #include <iostream>
 #include "DynamicCString.h"
 #define fREADER "reader.csv"
+#define bREADER "reader.bin"
 using namespace std;
 struct Reader {
 	char* ID, *name, *identify_numb, *email, *address;

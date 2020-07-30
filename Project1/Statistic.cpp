@@ -162,6 +162,8 @@ int numbOfBooks_borrowing(FILE* f1, FILE* f2) {
 		printf(".csv not found! ReadCSV failed \n");
 		return -1;
 	}
+	rewind(f1);
+	rewind(f2);
 	int bBor = 0, bRet = 0;
 	int n1, n2;
 	int a[100], b[100];
@@ -171,7 +173,7 @@ int numbOfBooks_borrowing(FILE* f1, FILE* f2) {
 	for (int i = 0; i < n1; i++) {
 		fscanf(f1, "%[^,],%[^,],%[^,],%[^,],%d\n", &trash, &trash, &trash, &trash, &a[i]);
 		for (int j = 0; j <= a[i]; j++) {
-			fscanf(f1, "[^\n]\n", &trash);
+			fscanf(f1, "%[^\n]\n", &trash);
 		}
 		bRet += a[i];
 	}
@@ -179,8 +181,8 @@ int numbOfBooks_borrowing(FILE* f1, FILE* f2) {
 	fscanf(f2, "%d\n", &n2); // check file borrow.txt
 	for (int i = 0; i < n2; i++) {
 		fscanf(f2, "%[^,],%[^,],%[^,],%d\n", &trash, &trash, &trash, &b[i]);
-		for (int j = 0; j <= b[i]; j++) {
-			fscanf(f2, "[^\n]\n", &trash);
+		for (int j = 0; j < b[i]; j++) {
+			fscanf(f2, "%[^\n]\n", &trash);
 		}
 		bBor += b[i];
 	}
@@ -199,6 +201,7 @@ void late(FILE* f) {
 		printf(".csv not found! ReadCSV failed \n");
 		return;
 	}
+	rewind(f);
 	int n, cost, totalLost;
 	int lost[50];
 	Date expeDate, realDate;
@@ -219,4 +222,5 @@ void late(FILE* f) {
 			printf("Ma doc gia: %s, tra tre: %d quyen, mat: %d quyen, tien phat: %dk\n", ID, a[i] - totalLost, totalLost, cost);
 		}
 	}
+	rewind(f);
 }

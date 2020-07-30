@@ -10,9 +10,9 @@ int loginUser(FILE* f) //tra ve ti`nh trang log
 	scanf("%s", &temp_string);
 	if ((ord = findUser(temp_string, f)) < 0)
 	{
-		printf("Tai khoan khong ton tai!\n");
-		rewind(f);
-		return 0;
+		//printf("Tai khoan khong ton tai!\n");
+		//rewind(f);
+		//return 0;
 	}
 	printf("Password : ");
 	//scanf("%s", &temp_string);
@@ -35,23 +35,11 @@ int loginUser(FILE* f) //tra ve ti`nh trang log
 			}
 		}
 	}
-	temp_string[i] = '\0';
-	printf("%s", temp_string);
-	if (checkpassUser(ord, temp_string, f) == 0)
+	temp_string[i-1] = '\0';
+	if (ord<0||checkpassUser(ord, temp_string, f) == 0)
 	{
-		do
-		{
-			printf("Sai mat khau!\n");
-			printf("Ban co muon nhap lai mat khau? (1 : co / 0 : khong) : ");
-			scanf("%d", &choice);
-			if (!choice)
-			{
-				rewind(f);
-				return 0;
-			}
-			printf("Password : ");
-			scanf("%s", &temp_string);
-		} while (checkpassUser(ord, temp_string, f) == 0);
+		printf("Tai khoan hoac mat khau khong dung !\n");
+		return 0;
 	}
 	readUser(u,ord, f);
 	if (u.status == 0)
@@ -133,6 +121,7 @@ void readUser(User&u,int ord, FILE* f)
 		printf(".csv not found! ReadCSV failed \n");
 		return;
 	}
+	rewind(f);
 	char temp[LENGTH_MAX];
 	int n; fscanf(f, "%d\n", &n); // dong da`u
 	for (int i = 1; i <= ord - 1; i++)
@@ -313,27 +302,56 @@ void updateUser_pass(FILE* &f) { //con 1 ty bug
 	rewind(f);
 	char temp_string[LENGTH_MAX];
 	int choice;
+	char c = '.';
 	printf("Nhap mat khau hien tai: ");
-	scanf("%s", &temp_string);
+	int i = 0;
+	while (c != 13) {
+		if (_kbhit())
+		{
+			c = _getch();
+			if (c != 8)
+			{
+				printf("*");
+				temp_string[i] = c;
+				i++;
+			}
+			else
+			{
+				printf("\b_\b");
+				i--;
+				temp_string[i] = '\0';
+			}
+		}
+	}
+	temp_string[i - 1] = '\0';
 	
 	while (_stricmp(temp_string,u.password)!=0)
 	{
 		printf("Sai mat khau!\n");
-		printf("Ban co muon nhap lai mat khau? (1 : co / 0 : khong) : ");
-		scanf("%d", &choice);
-		if (!choice)
-		{
-			rewind(f);
-			return;
-		}
-		printf("Nhap mat khau hien tai : ");
-		scanf("%s", &temp_string);
+		return;
 	}
 	printf("Nhap mat khau moi: ");
-	std::cin.ignore();
-	fgets(temp_string, sizeof(temp_string), stdin);
-	fflush(stdin);
-	temp_string[strlen(temp_string) - 1] = '\0';
+	i = 0;
+	c = '.';
+	while (c != 13) {
+		if (_kbhit())
+		{
+			c = _getch();
+			if (c != 8)
+			{
+				printf("*");
+				temp_string[i] = c;
+				i++;
+			}
+			else
+			{
+				printf("\b_\b");
+				i--;
+				temp_string[i] = '\0';
+			}
+		}
+	}
+	temp_string[i - 1] = '\0';
 	copyString_statictodynamic(temp_string, u.password);
 	writeUser(u,f);
 	printf("Da thay doi mat khau thanh cong!\n");
@@ -356,10 +374,15 @@ void giveUser_status(FILE* &f) {
 	fflush(stdin);
 	name[strlen(name) - 1] = '\0';
 	ord = findUser(name, f);
+	if (ord < 0)
+	{
+		printf("Nguoi dung khong ton tai!\n");
+		return;
+	}
 	User change;
 	readUser(change, ord,f);
 	printf("Nguoi nay se co chuc vu gi: (1: Chuyen vien/ 2: Quan ly): ");
-	scanf("%d", &change.status);
+	scanf("%d", &change.type);
 	writeUser(change, f);
 	rewind(f);
 } 
@@ -397,6 +420,7 @@ void createUser( FILE*& f) {
 	scanf("%d", &u_add.birth.m);
 	printf("Nam: ");
 	scanf("%d", &u_add.birth.y);
+	cin.ignore();
 	printf("Nhap CMND :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.identify_numb);
 	printf("Nhap dia chi :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.address);
 	printf("Nhap gioi tinh ( 0- Nu / 1 - Nam) :"); scanf("%d", &u_add.sex); 

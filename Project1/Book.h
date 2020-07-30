@@ -3,6 +3,7 @@
 #include <iostream>
 #include "DynamicCString.h"
 #define fBOOK "book.csv"
+#define bBOOK "book.bin"
 using namespace std;
 struct Book {
 	char* ISBN, *name, *author, *pub_company, *type;

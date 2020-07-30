@@ -6,9 +6,9 @@ extern Reader r;
 int login=0;
 int smallFunc;
 int func;
-FILE* fUser = fopen(fUSER,"r+t");
-FILE* fReader = fopen(fREADER, "r+t");
-FILE* fBook = fopen(fBOOK, "r+t");
+FILE* fUser ;
+FILE* fReader ;
+FILE* fBook ;
 FILE* fBorrow = fopen(fBORROW, "r+t");
 FILE* fReturn = fopen(fRETURN, "r+t");
 void func1() {
@@ -155,12 +155,12 @@ void func2() {
 		printf("3. Chinh sua thong tin mot doc gia\n");
 		printf("4. Xoa thong tin mot doc gia\n");
 		printf("5. Tim kiem mot doc gia theo CMND\n");
-		printf("6. Tim kiem sach theo ho ten\n");
+		printf("6. Tim kiem mot doc gia theo ho ten\n");
 		printf("0. Quay lai\n");
-		printf("=======================================================================================================================\n");
-		if (login == 0)
-		{
-			printf("Tinh trang : Chua dang nhap\n");
+		if (login == 0) {
+			printf("\nBan chua dang nhap\nKhong the su dung chuc nang nay\n");
+			system("pause");
+			return;
 		}
 		else
 		{
@@ -301,9 +301,10 @@ void func3() {
 		printf("6. Tim kiem sach theo ten sach\n");
 		printf("0. Quay lai\n");
 		printf("=======================================================================================================================\n");
-		if (login == 0)
-		{
-			printf("Tinh trang : Chua dang nhap\n");
+		if (login == 0) {
+			printf("\nBan chua dang nhap\nKhong the su dung chuc nang nay\n");
+			system("pause");
+			return;
 		}
 		else
 		{
@@ -450,9 +451,10 @@ void func4() {
 	printf("=======================================================================================================================\n");
 	printf("Chuc nang 4: Lap phieu muon sach\n");
 	printf("=======================================================================================================================\n");
-	if (login == 0)
-	{
-		printf("Tinh trang : Chua dang nhap\n");
+	if (login == 0) {
+		printf("\nBan chua dang nhap\nKhong the su dung chuc nang nay\n");
+		system("pause");
+		return;
 	}
 	else
 	{
@@ -491,9 +493,10 @@ void func5() {
 	printf("=======================================================================================================================\n");
 	printf("Chuc nang 5: Lap phieu tra sach\n");
 	printf("=======================================================================================================================\n");
-	if (login == 0)
-	{
-		printf("Tinh trang : Chua dang nhap\n");
+	if (login == 0) {
+		printf("\nBan chua dang nhap\nKhong the su dung chuc nang nay\n");
+		system("pause");
+		return;
 	}
 	else
 	{
@@ -541,9 +544,10 @@ void func6() {
 		printf("6. Thong ke danh sach doc gia bi tre han\n");
 		printf("0. Quay lai\n");
 		printf("=======================================================================================================================\n");
-		if (login == 0)
-		{
-			printf("Tinh trang : Chua dang nhap\n");
+		if (login == 0) {
+			printf("\nBan chua dang nhap\nKhong the su dung chuc nang nay\n");
+			system("pause");
+			return;
 		}
 		else
 		{
@@ -572,8 +576,7 @@ void func6() {
 			}
 		}
 		printf("=======================================================================================================================\n\n\n");
-		printf(" >> Ban chon chuc nang: ");
-		scanf_s("%d", &smallFunc);
+		
 
 		if (login == 0) {
 			printf("\nBan chua dang nhap\nKhong the su dung chuc nang nay\n");
@@ -585,7 +588,8 @@ void func6() {
 			system("pause");
 			return;
 		}
-
+		printf(" >> Ban chon chuc nang: ");
+		scanf_s("%d", &smallFunc);
 		switch (smallFunc) {
 			case 1: {
 				system("cls");
@@ -607,7 +611,7 @@ void func6() {
 			}
 			case 4: {
 				system("cls");
-				numbOfReaders_sex(fBook);
+				numbOfReaders_sex(fReader);
 				system("pause");
 				break;
 			}
@@ -716,4 +720,26 @@ void welcome() {
 		}
 	} while (func != 0);
 	logoutUser(login); //sau khi thoat chuong trinh phai logout(xoa du lieu tren ram) de tranh tran bo nho
+}
+
+void start()
+{
+	Encryption(bUSER,fUSER);
+	Encryption(bREADER,fREADER);
+	Encryption(bBOOK,fBOOK);
+	fUser = fopen(fUSER, "r+t");
+	fReader = fopen(fREADER, "r+t");
+	fBook = fopen(fBOOK, "r+t");
+}
+void end()
+{
+	fclose(fUser);
+	fclose(fReader);
+	fclose(fBook);
+	Decryption(fUSER,bUSER );
+	Decryption(fREADER,bREADER);
+	Decryption( fBOOK,bBOOK);
+	remove(fUSER);
+	remove(fREADER);
+	remove(fBOOK);
 }

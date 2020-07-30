@@ -275,7 +275,7 @@ void updateReaderInfo(FILE*& f)
 		}
 		case 6: {
 			char temp_string[LENGTH_MAX];
-			printf("Nhap CMND moi: ");
+			printf("Nhap dia chi moi: ");
 			std::cin.ignore();
 			fgets(temp_string, sizeof(temp_string), stdin);
 			fflush(stdin);
@@ -296,6 +296,7 @@ void updateReaderInfo(FILE*& f)
 		}
 		}
 	} while (choice);
+	freeReader();
 	rewind(f);
 }
 
@@ -341,18 +342,13 @@ void createReader(FILE*& f) {
 	scanf("%d", &r_add.mfg.m);
 	printf("Nam: ");
 	scanf("%d", &r_add.mfg.y);
-	printf("Nhap ngay het han the: \n"); 
-	printf("Ngay: ");
-	scanf("%d", &r_add.exp.d);
-	printf("Thang: ");
-	scanf("%d", &r_add.exp.m);
-	printf("Nam: ");
-	scanf("%d", &r_add.exp.y);
+	r_add.exp = sau_k_ngay(r_add.mfg, 365 * 4);
 	r_add.ord_numb = n + 1;
 	writeReader(r_add, f);
 	//fseek(f, 0, SEEK_SET);
 	//fprintf(f, "%d", n + 1);
 	printf("\nDa tao doc gia co ma doc gia: %s\n", r_add.ID);
+	freeReader();
 	rewind(f);
 }
 
@@ -437,11 +433,11 @@ int chooseReader(Reader* arr, int n)
 
 void freeReader()
 {
-	free(r.ID);
-	free(r.name);
-	free(r.identify_numb);
-	free(r.email);
-	free(r.address);
+	free(r.ID); r.ID = NULL;
+	free(r.name); r.name = NULL;
+	free(r.identify_numb); r.identify_numb = NULL;
+	free(r.email); r.email = NULL;
+	free(r.address); r.address = NULL;
 }
 
 void deleteReader_interface(FILE* f)

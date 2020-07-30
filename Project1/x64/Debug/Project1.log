@@ -1,0 +1,10 @@
+﻿  Menu.cpp
+  Reader.cpp
+E:\Do an cuoi ki\haha\haha\Project1\Reader.cpp(395,9): warning C4477: 'printf' : format string '%10d' requires an argument of type 'int', but variadic argument 1 has type 'char *'
+E:\Do an cuoi ki\haha\haha\Project1\Reader.cpp(395,9): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'char *'
+  User.cpp
+E:\Do an cuoi ki\haha\haha\Project1\User.cpp(6,10): warning C4101: 'choice': unreferenced local variable
+E:\Do an cuoi ki\haha\haha\Project1\User.cpp(97,9): warning C4101: 'status': unreferenced local variable
+E:\Do an cuoi ki\haha\haha\Project1\User.cpp(304,6): warning C4101: 'choice': unreferenced local variable
+  Generating Code...
+  Project1.vcxproj -> E:\Do an cuoi ki\haha\haha\x64\Debug\Project1.exe

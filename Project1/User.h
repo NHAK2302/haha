@@ -5,15 +5,16 @@
 #include<stdio.h> 
 #include <conio.h>
 #define fUSER "user.csv"
+#define bUSER "user.bin"
 struct User {
 	int ord_numb; //da'nh so thu tu
 	char* ID, *password, *name,*identify_numb,*address;
 	Date birth;
 	int sex; // male = 1, female = 0
-	int status; //lock = 1,activate = 2,admin = 3
-	int type; 
+	int status; //lock = 0, unlock = 1
+	int type;  // 1 chuyen vien, 2 quan li, 3 admin
 };
-
+using namespace std;
 
 int loginUser(FILE* f);
 

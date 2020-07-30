@@ -141,7 +141,7 @@ void writeBook(Book& b, FILE*& f) {
 	{
 		line++;
 		if (line == b.ord_numb)
-			fprintf(temp_f, "%d,%s,%s,%s,%s,%s,%d/%d/%d,%d,%d,%d\n"
+			fprintf(temp_f, "%d,%s,%s,%s,%s,%d,%s,%d,%d\n"
 				, b.ord_numb, b.ISBN, b.name, b.author, b.pub_company, b.pub_year, b.type, b.price, b.amount);
 		else
 			fprintf(temp_f, "\n");
@@ -150,7 +150,7 @@ void writeBook(Book& b, FILE*& f) {
 	fclose(temp_f);
 	remove(fBOOK);
 	rename("temp.txt", fBOOK);
-	f = fopen(fBOOK, "r");
+	f = fopen(fBOOK, "r+t");
 }
 
 void updateBookInfo(FILE*& f) {
@@ -340,7 +340,7 @@ void outputBook(Book& b) {
 	printf("%25s|", b.author);
 	printf("%20s|", b.pub_company);
 	printf("%12d|", b.pub_year);
-	printf("%12s|", b.type);
+	printf("%15s|", b.type);
 	printf("%10d|", b.price);
 	printf("%9d|", b.amount);
 	printf("\n");
@@ -369,7 +369,7 @@ void readBook_all(FILE* f) {
 	int n;
 	rewind(f);
 	fscanf(f, "%d", &n);
-	printf("%3s|%10s|%30s|%25s|%20s|%12s|%12s|%10s|%9s|\n", "STT", "ISBN", "Ten sach", "Tac gia", "Nha xuat ban", "Nam xuat ban", "The loai", "Gia sach", "So quyen");
+	printf("%3s|%10s|%30s|%25s|%20s|%12s|%15s|%10s|%9s|\n", "STT", "ISBN", "Ten sach", "Tac gia", "Nha xuat ban", "Nam xuat ban", "The loai", "Gia sach", "So quyen");
 	for (int i = 1; i <= n; i++) {
 		fscanf(f, "%d,", &b.ord_numb);
 		fscanf(f, "%[^,],", &temp);
@@ -433,11 +433,11 @@ void findBookByName_interface(Book& b, FILE* f) {
 }
 
 void freeBook() {
-	free(b.ISBN);
-	free(b.name);
-	free(b.author);
-	free(b.pub_company);
-	free(b.type);
+	free(b.ISBN); b.ISBN = NULL;
+	free(b.name); b.name = NULL;
+	free(b.author); b.author = NULL;
+	free(b.pub_company); b.pub_company = NULL;
+	free(b.type); b.type = NULL;
 }
 
 void fillBook(Book& b, FILE* f) {

@@ -1,5 +1,6 @@
-﻿  Note.cpp
-E:\Do an cuoi ki\haha\Project1\Note.cpp(71,14): warning C4101: 'n_book': unreferenced local variable
-E:\Do an cuoi ki\haha\Project1\Note.cpp(86,7): warning C4101: 'date': unreferenced local variable
-E:\Do an cuoi ki\haha\Project1\Note.cpp(184,9): warning C4101: 'rArray': unreferenced local variable
-  Project1.vcxproj -> E:\Do an cuoi ki\haha\Debug\Project1.exe
+﻿  Book.cpp
+  Reader.cpp
+E:\Do an cuoi ki\haha\haha\Project1\Reader.cpp(395,9): warning C4477: 'printf' : format string '%10d' requires an argument of type 'int', but variadic argument 1 has type 'char *'
+  Generating Code...
+E:\Do an cuoi ki\haha\haha\Project1\Book.cpp(79): warning C4715: 'findBookByType': not all control paths return a value
+  Project1.vcxproj -> E:\Do an cuoi ki\haha\haha\Debug\Project1.exe
