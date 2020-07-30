@@ -33,6 +33,8 @@ void readBook_all(FILE* f);
 
 void findBookByISBN_interface(Book& b, FILE* f);
 
+void findBookByISBN_interface(Book& b, FILE* f, char* ISBN_numb);
+
 void findBookByName_interface(Book& b, FILE* f);
 
 void freeBook();

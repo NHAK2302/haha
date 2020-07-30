@@ -404,6 +404,19 @@ void findBookByISBN_interface(Book& b,FILE* f) {
 	readBook(b, ord[choice], f);
 }
 
+void findBookByISBN_interface(Book& b, FILE* f,char* ISBN_numb) {
+	
+	int ord[100], n, choice; // 100 thang trung ten nhau la het co~
+	Book bArray[100];
+	if ((n = findBookByISBN(ISBN_numb, f, ord)) <= 0)
+	{
+		printf("Khong tim thay sach!");
+		return;
+	}
+	readBook_array(f, ord, bArray, n);
+	choice = chooseBook(bArray, n);
+	readBook(b, ord[choice], f);
+}
 void findBookByName_interface(Book& b, FILE* f) {
 	char name[LENGTH_MAX];
 	int ord[100], n, choice; // 100 thang trung ten nhau la het co~

@@ -82,10 +82,11 @@ void createReturnNote(FILE*& f)
 		}
 
 	}
-	Note n;
+	Note n; n.reader_ID = NULL;
 	Date date; char* date_string;
 	printf("Lap phieu tra sach dua tren phieu muon sach co tu truoc :\n");
-	fillNote(n, fBorrow);
+	while(n.reader_ID==NULL)
+		fillNote(n, fBorrow);
 	fprintf(temp_f, "%s,", n.reader_ID);
 	date_string = convertDatetoString(n.bor_date);
 	fprintf(temp_f, "%s,", date_string);
@@ -101,18 +102,35 @@ void createReturnNote(FILE*& f)
 	date_string = convertDatetoString(n.real_date);
 	fprintf(temp_f, "%s,", date_string);
 	fprintf(temp_f, "%d\n", n.book_number);
-	for (int i = 0; i < n.book_number; i++)
+	int pay = 0,lose_all = 0;
+	if ((_2dateDistanceByday(n.expe_date, n.real_date)) > 7)
 	{
-		fprintf(temp_f,"%s\n", n.book_ISBN[i]);
-	}
-	if (checkdate(n.real_date, n.expe_date))
-	{
-		fprintf(temp_f,"1\n");
+		printf("Da tren han qua 7 ngay, coi nhu tat ca cac sach dang muon bi mat!");
+		lose_all = 1;
 	}
 	else
+		printf("Cac ma sach sau day co bi mat khong? ((1) Co / (0)Khong\n");
+	for (int i = 0; i < n.book_number; i++)
 	{
-		fprintf(temp_f,"0\n");
+		int lose = lose_all;
+		if (lose == 0) {
+			printf("Sach co ma ISBN %s :", n.book_ISBN[i]); scanf("%d", &lose);
+		}
+		if (lose == 1)
+		{
+			Book b;
+			printf("Xac nhan sach bi ma^'t :\n");
+			findBookByISBN_interface(b, fBook, n.book_ISBN[i]);
+			pay += b.price * 2;
+		}
+		fprintf(temp_f, "%s,%d\n", n.book_ISBN[i], lose);
 	}
+	if (checkdate(n.expe_date,n.real_date)&&lose_all==0)
+	{
+		pay += _2dateDistanceByday(n.expe_date, n.real_date)*5;
+	}
+	printf("Tong so tien phai de`n : %d", pay);
+		fprintf(temp_f,"%d\n",pay);
 	fclose(f);
 	fclose(temp_f);
 	remove(fRETURN);
@@ -151,7 +169,7 @@ int findNote(char* name,FILE* f,Note* result)
 		}
 		else 
 		{
-			for (int j = 0; i < check.book_number ; i++)
+			for (int j = 0; j < check.book_number ; j++)
 			{
 				fscanf(f, "%[^\n]\n", trash);
 			}
@@ -167,7 +185,7 @@ void fillNote(Note& n,FILE*f)
 	printf("Nhap ma doc gia muon lap phieu tra sach :"); cin.ignore(); scanf("%[^\n]%*c", name);
 	if ((k = findNote(name,f,arr)) <= 0)
 	{
-		printf("Khong tim thay phieu muon sach tu doc gia nay!");
+		printf("Khong tim thay phieu muon sach tu doc gia nay!\n");
 		return;
 	}
 	readNote_array(arr, k);
