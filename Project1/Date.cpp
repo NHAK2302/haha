@@ -74,8 +74,8 @@ int daysOfMonth(Date& a)
 }
 int _2dateDistanceByday(Date p, Date n)
 {
-	if (!checkdate(p, n))
-		swapdate(p, n);
+	/*if (!checkdate(p, n))
+		swapdate(p, n);*/
 	return daysFromzero(n) - daysFromzero(p);
 }
 int _2dateDistanceByyear(Date p, Date n)

@@ -39,7 +39,7 @@ void numbOfBooks_type(FILE* f) {
 		return;
 	}
 	Book b;
-	char typeArr[20][LENGTH_MAX];
+	char* typeArr[20];
 	char temp[LENGTH_MAX];
 	int amountOfType = 0;
 	int n;
@@ -60,7 +60,7 @@ void numbOfBooks_type(FILE* f) {
 		copyString_statictodynamic(temp, b.type);
 		fscanf(f, "%d,%d\n", &b.price, &b.amount);
 		if (typeNotExist(typeArr, amountOfType, b.type)) {
-			strcpy(typeArr[amountOfType++], b.type);
+			copyString_statictodynamic(b.type, typeArr[amountOfType++]);
 		}
 	}
 	rewind(f);
@@ -80,7 +80,7 @@ void numbOfBooks_type(FILE* f) {
 	rewind(f);
 }
 
-bool typeNotExist(char typeArr[100][LENGTH_MAX], int n, char* cur_type) {
+bool typeNotExist(char* typeArr[20], int n, char* cur_type) {
 	for (int i = 0; i < n; i++) {
 		if (_stricmp(cur_type, typeArr[i]) == 0) {
 			return false;
@@ -174,10 +174,35 @@ int numbOfBooks_borrowing(FILE* f1, FILE* f2) {
 		bBor += b[i];
 	}
 	rewind(f2);
-	return bBor-bRet;
+	return bBor - bRet;
 }
 void numbOfBooks_borrowing_interface(FILE* f1, FILE* f2)
 {
 	int result = numbOfBooks_borrowing(f1, f2);
 	printf("So cuon sach dang duoc cho muon la :%d", result);
+}
+
+void late(FILE* f) {
+	if (f == NULL)
+	{
+		printf(".csv not found! ReadCSV failed \n");
+		return;
+	}
+	int n, cost;
+	Date expeDate, realDate;
+	char ID[LENGTH_MAX], string[LENGTH_MAX], expe[LENGTH_MAX], real[LENGTH_MAX];
+	fscanf(f, "%d\n", &n);
+	int* a = new int[n];
+	for (int i = 0; i < n; i++) {
+		fscanf(f, "%[^,],%[^,],%[^,],%[^,],%d\n", &ID, &string, &expe, &real, &a[i]);
+		expeDate = convertStringtoDate(expe);
+		realDate = convertStringtoDate(real);
+		for (int j = 0; j < a[i]; j++) {
+			fscanf(f, "%[^\n]\n", &string);
+		}
+		fscanf(f, "%d\n", &cost);
+		if (_2dateDistanceByday(expeDate, realDate) > 0) {
+			printf("Ma doc gia: %s, tra tre: %d quyen, tien phat: %dk\n", ID, a[i], cost);
+		}
+	}
 }
