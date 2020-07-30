@@ -199,21 +199,24 @@ void late(FILE* f) {
 		printf(".csv not found! ReadCSV failed \n");
 		return;
 	}
-	int n, cost;
+	int n, cost, totalLost;
+	int lost[50];
 	Date expeDate, realDate;
 	char ID[LENGTH_MAX], string[LENGTH_MAX], expe[LENGTH_MAX], real[LENGTH_MAX];
 	fscanf(f, "%d\n", &n);
 	int* a = new int[n];
 	for (int i = 0; i < n; i++) {
 		fscanf(f, "%[^,],%[^,],%[^,],%[^,],%d\n", &ID, &string, &expe, &real, &a[i]);
+		totalLost = 0;
 		expeDate = convertStringtoDate(expe);
 		realDate = convertStringtoDate(real);
 		for (int j = 0; j < a[i]; j++) {
-			fscanf(f, "%[^\n]\n", &string);
+			fscanf(f, "%[^,],%d\n", &string, &lost[j]);
+			totalLost += lost[j];
 		}
 		fscanf(f, "%d\n", &cost);
 		if (_2dateDistanceByday(expeDate, realDate) > 0) {
-			printf("Ma doc gia: %s, tra tre: %d quyen, tien phat: %dk\n", ID, a[i], cost);
+			printf("Ma doc gia: %s, tra tre: %d quyen, mat: %d quyen, tien phat: %dk\n", ID, a[i] - totalLost, totalLost, cost);
 		}
 	}
 }
