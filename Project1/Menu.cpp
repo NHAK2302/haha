@@ -200,7 +200,7 @@ void func2() {
 					break;
 				}
 				else {
-					//xem list reader
+					system("cls");
 					readReader_all(fReader);
 					system("pause");
 					break;
@@ -213,7 +213,7 @@ void func2() {
 					break;
 				}
 				else {
-					//add reader
+					system("cls");
 					createReader(fReader);
 					system("pause");
 					break;
@@ -226,7 +226,7 @@ void func2() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //xem list reader
+					system("cls");
 					updateReaderInfo(fReader);
 					system("pause");
 					break;
@@ -244,6 +244,7 @@ void func2() {
 					break;
 				}
 				else {
+					system("cls");
 					deleteReader_interface(fReader);
 					system("pause");
 					break;
@@ -256,7 +257,7 @@ void func2() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //find reader by cmnd
+					system("cls");
 					findReaderByIdenNumb_interface(r,fReader);
 					system("pause");
 					break;
@@ -269,7 +270,7 @@ void func2() {
 					break;
 				}
 				else {
-					printf("Chua co ham\n"); //find reader by full name
+					system("cls");
 					findReaderByName_interface(r,fReader);
 					system("pause");
 					break;
@@ -347,7 +348,7 @@ void func3() {
 					break;
 				}
 				else {
-					//show list of books
+					system("cls");
 					readBook_all(fBook);
 					system("pause");
 					break;
@@ -365,7 +366,7 @@ void func3() {
 					break;
 				}
 				else {
-					//add book
+					system("cls");
 					createBook(fBook);
 					system("pause");
 					break;
@@ -383,7 +384,7 @@ void func3() {
 					break;
 				}
 				else {
-					//update book's info
+					system("cls");
 					updateBookInfo(fBook);
 					system("pause");
 					break;
@@ -401,7 +402,7 @@ void func3() {
 					break;
 				}
 				else {
-					//remove book's info
+					system("cls");
 					deleteBook_interface(fBook);
 					system("pause");
 					break;
@@ -414,7 +415,7 @@ void func3() {
 					break;
 				}
 				else {
-					//find books by ISBN
+					system("cls");
 					findBookByISBN_interface(b,fBook);
 					system("pause");
 					break;
@@ -427,7 +428,7 @@ void func3() {
 					break;
 				}
 				else {
-					//find books by book's name
+					system("cls");
 					findBookByName_interface(b,fBook);
 					system("pause");
 					break;
@@ -587,31 +588,37 @@ void func6() {
 
 		switch (smallFunc) {
 			case 1: {
-				printf("CHua co ham\n");
+				system("cls");
+				printf("So sach co trong thu vien: %d", numbOfBooks_all(fBook));
 				system("pause");
 				break;
 			}
 			case 2: {
+				system("cls");
 				numbOfBooks_type(fBook);
 				system("pause");
 				break;
 			}
 			case 3: {
-				printf("CHua co ham\n");
+				system("cls");
+				printf("Tong so doc gia trong thu vien: %d", numbOfReaders_all(fBook));
 				system("pause");
 				break;
 			}
 			case 4: {
-				printf("CHua co ham\n");
+				system("cls");
+				numbOfReaders_sex(fBook);
 				system("pause");
 				break;
 			}
 			case 5: {
+				system("cls");
 				numbOfBooks_borrowing_interface(fReturn, fBorrow);
 				system("pause");
 				break;
 			}
 			case 6: {
+				system("cls");
 				late(fReturn);
 				system("pause");
 				break;
