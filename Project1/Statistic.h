@@ -12,7 +12,7 @@ int numbOfBooks_all(FILE* f);
 
 void numbOfBooks_type(FILE* f);
 
-bool typeNotExist(char* typeArr[20], int n, char* cur_type);
+int typeExist(char** typeArr, int n, char* cur_type);
 
 int numbOfReaders_all(FILE* f);
 

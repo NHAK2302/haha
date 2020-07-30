@@ -42,6 +42,8 @@ void numbOfBooks_type(FILE* f) {
 	char* typeArr[20];
 	char temp[LENGTH_MAX];
 	int amountOfType = 0;
+	int amountPerType[20] = {};
+
 	int n;
 	rewind(f);
 	fscanf(f, "%d", &n);
@@ -59,36 +61,45 @@ void numbOfBooks_type(FILE* f) {
 		fscanf(f, "%[^,],", &temp);
 		copyString_statictodynamic(temp, b.type);
 		fscanf(f, "%d,%d\n", &b.price, &b.amount);
-		if (typeNotExist(typeArr, amountOfType, b.type)) {
-			copyString_statictodynamic(b.type, typeArr[amountOfType++]);
+		int pos;
+		if (pos = typeExist(typeArr, amountOfType, b.type) < 0) {
+			copyString_statictodynamic(b.type, typeArr[amountOfType]);
+			amountPerType[amountOfType++] += b.amount;
 		}
-	}
-	rewind(f);
-	int ord[100];
-	int amountPerType[20] = {};
-	int n_temp;
-	for (int i = 0; i < amountOfType; i++) {  //kiem tra tung the loai
-		n_temp = findBookByType(typeArr[i], f, ord);  //tim sach co the loai nhu tren
-		for (int j = 0; j < n_temp; j++) {
-			readBook(b, ord[j], f);
-			amountPerType[i] += b.amount;
+		else
+		{
+			amountPerType[pos] += b.amount;
 		}
+
 	}
 	for (int i = 0; i < amountOfType; i++) {
 		printf("%s: %d\n", typeArr[i], amountPerType[i]);
 	}
 	rewind(f);
+	//int ord[100];
+	//int amountPerType[20] = {};
+	//int n_temp;
+	//for (int i = 0; i < amountOfType; i++) {  //kiem tra tung the loai
+	//	n_temp = findBookByType(typeArr[i], f, ord);  //tim sach co the loai nhu tren
+	//	for (int j = 0; j < n_temp; j++) {
+	//		readBook(b, ord[j], f);
+	//		amountPerType[i] += b.amount;
+	//	}
+	//}
+	//for (int i = 0; i < amountOfType; i++) {
+	//	printf("%s: %d\n", typeArr[i], amountPerType[i]);
+	//}
+	//rewind(f);
 }
+int typeExist(char** typeArr, int n, char* cur_type) {
 
-bool typeNotExist(char* typeArr[20], int n, char* cur_type) {
 	for (int i = 0; i < n; i++) {
 		if (_stricmp(cur_type, typeArr[i]) == 0) {
-			return false;
+			return i;
 		}
 	}
-	return true;
+	return -1;
 }
-
 int numbOfReaders_all(FILE* f) {
 	if (f == NULL)
 	{
