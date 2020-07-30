@@ -608,6 +608,7 @@ void func6() {
 			}
 			case 5: {
 				printf("CHua co ham\n");
+				numbOfBooks_borrowing_interface(fReturn, fBorrow);
 				system("pause");
 				break;
 			}

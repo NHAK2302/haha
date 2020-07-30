@@ -18,4 +18,6 @@ int numbOfReaders_all(FILE* f);
 
 void numbOfReaders_sex(FILE* f);
 
-int numbOfBooks_borrowed(FILE* f1, FILE* f2);
+int numbOfBooks_borrowing(FILE* f1, FILE* f2);
+
+void numbOfBooks_borrowing_interface(FILE* f1, FILE* f2);

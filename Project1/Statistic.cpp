@@ -145,7 +145,7 @@ void numbOfReaders_sex(FILE* f) {
 	printf("Nu: %d\n", female);
 }
 
-int numbOfBooks_borrowed(FILE* f1, FILE* f2) {
+int numbOfBooks_borrowing(FILE* f1, FILE* f2) {
 	if (f1 == NULL || f2 == NULL)
 	{
 		printf(".csv not found! ReadCSV failed \n");
@@ -158,7 +158,7 @@ int numbOfBooks_borrowed(FILE* f1, FILE* f2) {
 	rewind(f1); rewind(f2);
 	fscanf(f1, "%d\n", &n1); //check file return.txt
 	for (int i = 0; i < n1; i++) {
-		fscanf(f1, "%[^,],%[^,],%[^,],%[^,],%d\n", &trash, &trash, &trash, &trash, a[i]);
+		fscanf(f1, "%[^,],%[^,],%[^,],%[^,],%d\n", &trash, &trash, &trash, &trash, &a[i]);
 		for (int j = 0; j <= a[i]; j++) {
 			fscanf(f1, "[^\n]\n", &trash);
 		}
@@ -167,12 +167,17 @@ int numbOfBooks_borrowed(FILE* f1, FILE* f2) {
 	rewind(f1);
 	fscanf(f2, "%d\n", &n2); // check file borrow.txt
 	for (int i = 0; i < n2; i++) {
-		fscanf(f1, "%[^,],%[^,],%[^,],%d\n", &trash, &trash, &trash, b[i]);
+		fscanf(f2, "%[^,],%[^,],%[^,],%d\n", &trash, &trash, &trash, &b[i]);
 		for (int j = 0; j <= b[i]; j++) {
-			fscanf(f1, "[^\n]\n", &trash);
+			fscanf(f2, "[^\n]\n", &trash);
 		}
 		bBor += b[i];
 	}
 	rewind(f2);
-	return bRet - bBor;
+	return bBor-bRet;
+}
+void numbOfBooks_borrowing_interface(FILE* f1, FILE* f2)
+{
+	int result = numbOfBooks_borrowing(f1, f2);
+	printf("So cuon sach dang duoc cho muon la :%d", result);
 }

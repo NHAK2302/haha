@@ -1,5 +1,6 @@
-﻿  Note.cpp
-E:\Do an cuoi ki\haha\Project1\Note.cpp(71,14): warning C4101: 'n_book': unreferenced local variable
-E:\Do an cuoi ki\haha\Project1\Note.cpp(86,7): warning C4101: 'date': unreferenced local variable
-E:\Do an cuoi ki\haha\Project1\Note.cpp(166,9): warning C4101: 'rArray': unreferenced local variable
+﻿  Statistic.cpp
+E:\Do an cuoi ki\haha\Project1\Statistic.cpp(163,26): warning C4474: 'fscanf' : too many arguments passed for format string
+E:\Do an cuoi ki\haha\Project1\Statistic.cpp(163,26): message : placeholders and their parameters expect 0 variadic arguments, but 1 were provided
+E:\Do an cuoi ki\haha\Project1\Statistic.cpp(172,26): warning C4474: 'fscanf' : too many arguments passed for format string
+E:\Do an cuoi ki\haha\Project1\Statistic.cpp(172,26): message : placeholders and their parameters expect 0 variadic arguments, but 1 were provided
   Project1.vcxproj -> E:\Do an cuoi ki\haha\Debug\Project1.exe
