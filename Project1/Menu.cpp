@@ -592,7 +592,7 @@ void func6() {
 				break;
 			}
 			case 2: {
-				printf("CHua co ham\n");
+				numbOfBooks_type(fBook);
 				system("pause");
 				break;
 			}
@@ -607,13 +607,12 @@ void func6() {
 				break;
 			}
 			case 5: {
-				printf("CHua co ham\n");
 				numbOfBooks_borrowing_interface(fReturn, fBorrow);
 				system("pause");
 				break;
 			}
 			case 6: {
-				printf("CHua co ham\n");
+				late(fReturn);
 				system("pause");
 				break;
 			}

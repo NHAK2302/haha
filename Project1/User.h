@@ -3,6 +3,7 @@
 #include "DynamicCString.h"
 #include<iostream>
 #include<stdio.h> 
+#include <conio.h>
 #define fUSER "user.csv"
 struct User {
 	int ord_numb; //da'nh so thu tu

@@ -4,7 +4,8 @@ User u;
 int loginUser(FILE* f) //tra ve ti`nh trang log
 {
 	int ord,choice;
-	char temp_string[LENGTH_MAX];
+	char temp_string[200];
+	char c = '.';
 	printf("ID : ");
 	scanf("%s", &temp_string);
 	if ((ord = findUser(temp_string, f)) < 0)
@@ -14,7 +15,28 @@ int loginUser(FILE* f) //tra ve ti`nh trang log
 		return 0;
 	}
 	printf("Password : ");
-	scanf("%s", &temp_string);
+	//scanf("%s", &temp_string);
+	int i = 0;
+	while (c != 13) {
+		if (_kbhit())
+		{
+			c = _getch();
+			if (c != 8)
+			{
+				printf("*");
+				temp_string[i] = c;
+				i++;
+			}
+			else
+			{
+				printf("\b_\b");
+				i--;
+				temp_string[i] = '\0';
+			}
+		}
+	}
+	temp_string[i] = '\0';
+	printf("%s", temp_string);
 	if (checkpassUser(ord, temp_string, f) == 0)
 	{
 		do
