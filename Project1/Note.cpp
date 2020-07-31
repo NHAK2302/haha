@@ -136,6 +136,7 @@ void createReturnNote(FILE*& f)
 	remove(fRETURN);
 	rename("temp.txt", fRETURN);
 	f = fopen(fRETURN, "r+t");
+	freeNote(n);
 }
 int findNote(char* name,FILE* f,Note* result)
 {
@@ -191,6 +192,11 @@ void fillNote(Note& n,FILE*f)
 	readNote_array(arr, k);
 	choice = chooseNote(arr, k);
 	n = arr[choice];
+	for (int i = 0; i < k; i++)
+	{
+		if (i != choice)
+			freeNote(arr[i]);
+	}
 }
 void readNote_array(Note* arr,int n)
 {
@@ -214,4 +220,14 @@ int chooseNote(Note* arr, int n)
 	printf("Chon phieu muon sach tuong ung de tiep tuc :");
 	scanf("%d", &result);
 	return result;
+}
+void freeNote(Note& n)
+{
+	free(n.reader_ID);
+	n.reader_ID = NULL;
+	for (int i = 0; i < n.book_number; i++)
+	{
+		free(n.book_ISBN[i]);
+		n.book_ISBN[i] = NULL;
+	}
 }

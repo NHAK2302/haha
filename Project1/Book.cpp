@@ -416,6 +416,11 @@ void findBookByISBN_interface(Book& b, FILE* f,char* ISBN_numb) {
 	readBook_array(f, ord, bArray, n);
 	choice = chooseBook(bArray, n);
 	readBook(b, ord[choice], f);
+	for (int i = 0; i < n; i++)
+	{
+		if (i != choice)
+			freeBook(bArray[i]);
+	}
 }
 void findBookByName_interface(Book& b, FILE* f) {
 	char name[LENGTH_MAX];
@@ -430,9 +435,14 @@ void findBookByName_interface(Book& b, FILE* f) {
 	readBook_array(f, ord, bArray, n);
 	choice = chooseBook(bArray, n);
 	readBook(b, ord[choice], f);
+	for (int i = 0; i < n; i++)
+	{
+		if (i != choice)
+			freeBook(bArray[i]);
+	}
 }
 
-void freeBook() {
+void freeBook(Book& b) {
 	free(b.ISBN); b.ISBN = NULL;
 	free(b.name); b.name = NULL;
 	free(b.author); b.author = NULL;
@@ -450,7 +460,7 @@ void fillBook(Book& b, FILE* f) {
 		{
 		case 0:
 		{
-			freeBook();
+			freeBook(b);
 			break;
 		}
 		default:
@@ -529,6 +539,6 @@ void deleteBook(Book b, FILE* f) {
 void deleteBook_interface(FILE* f) {
 	fillBook(b, f);
 	deleteBook(b, f);
-	freeBook();
+	freeBook(b);
 	printf("Da xoa sach thanh cong!\n");
 }

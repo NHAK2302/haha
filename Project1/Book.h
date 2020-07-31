@@ -38,7 +38,7 @@ void findBookByISBN_interface(Book& b, FILE* f, char* ISBN_numb);
 
 void findBookByName_interface(Book& b, FILE* f);
 
-void freeBook();
+void freeBook(Book& b);
 
 void fillBook(Book& b, FILE* f);
 

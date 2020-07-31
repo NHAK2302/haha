@@ -1,6 +1,9 @@
 ﻿  Generating code
   Finished generating code
-  5 of 92 functions ( 5.4%) were compiled, the rest were copied from previous compilation.
+Book.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Book.obj' or at 'E:\Do an cuoi ki\haha\haha\x64\Release\vc142.pdb'; linking object as if no debug info
+Date.obj : warning LNK4020: a type record in 'e:\do an cuoi ki\haha\haha\project1\x64\release\vc142.pdb' is corrupted; some symbols and types may not be accessible from the debugger
+DynamicCString.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'DynamicCString.obj' or at 'E:\Do an cuoi ki\haha\haha\x64\Release\vc142.pdb'; linking object as if no debug info
+  0 of 93 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Project1.vcxproj -> E:\Do an cuoi ki\haha\haha\x64\Release\Project1.exe

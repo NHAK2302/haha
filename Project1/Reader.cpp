@@ -128,6 +128,11 @@ void findReaderByIdenNumb_interface(Reader& r,FILE* f)
 	readReader_array(f, ord, rArray, n);
 	choice = chooseReader(rArray, n);
 	readReader(r, ord[choice], f);
+	for (int i = 0; i < n; i++)
+	{
+		if (i != choice)
+			freeReader(rArray[i]);
+	}
 }
 
 void findReaderByName_interface(Reader& r,FILE* f)
@@ -144,6 +149,11 @@ void findReaderByName_interface(Reader& r,FILE* f)
 	readReader_array(f, ord, rArray, n);
 	choice = chooseReader(rArray, n);
 	readReader(r, ord[choice], f);
+	for (int i = 0; i < n; i++)
+	{
+		if (i != choice)
+			freeReader(rArray[i]);
+	}
 }
 
 int findReaderByName(char* name, FILE* f, int* result)
@@ -296,7 +306,7 @@ void updateReaderInfo(FILE*& f)
 		}
 		}
 	} while (choice);
-	freeReader();
+	freeReader(r);
 	rewind(f);
 }
 
@@ -348,7 +358,7 @@ void createReader(FILE*& f) {
 	//fseek(f, 0, SEEK_SET);
 	//fprintf(f, "%d", n + 1);
 	printf("\nDa tao doc gia co ma doc gia: %s\n", r_add.ID);
-	freeReader();
+	freeReader(r);
 	rewind(f);
 }
 
@@ -386,13 +396,14 @@ void readReader_all(FILE* f) {
 		r.exp = convertStringtoDate(temp);
 		outputReader(r);
 	}
+	freeReader(r);
 	rewind(f);
 }
 
 void outputReader(Reader& r)
 {
 	printf("%3d|", r.ord_numb);
-	printf("%10d|", r.ID);
+	printf("%10s|", r.ID);
 	printf("%25s|", r.name);
 	printf("%12s|", r.identify_numb);
 	char* date_string = convertDatetoString(r.birth);
@@ -431,7 +442,7 @@ int chooseReader(Reader* arr, int n)
 	return choice;
 }
 
-void freeReader()
+void freeReader(Reader& r)
 {
 	free(r.ID); r.ID = NULL;
 	free(r.name); r.name = NULL;
@@ -444,7 +455,7 @@ void deleteReader_interface(FILE* f)
 {
 	fillReader(r,f);
 	deleteReader(r, f);
-	freeReader();
+	freeReader(r);
 	printf("Xoa doc gia thanh cong!\n");
 }
 
@@ -508,7 +519,7 @@ void fillReader(Reader& r,FILE* f)
 		{
 		case 0:
 		{
-			freeReader();
+			freeReader(r);
 			break;
 		}
 		default:

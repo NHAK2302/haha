@@ -25,3 +25,5 @@ void fillNote(Note& n, FILE* f);
 void readNote_array(Note* arr, int n);
 
 int chooseNote(Note* arr, int n);
+
+void freeNote(Note& n);

@@ -35,10 +35,10 @@ void readReader_array(FILE* f, int* ord, Reader* arr, int n);
 
 int chooseReader(Reader* arr, int n);
 
+void freeReader(Reader& r);
+
 void deleteReader_interface(FILE* f);
 
 void deleteReader(Reader r, FILE* f);
 
 void fillReader(Reader& r, FILE* f);
-
-void freeReader();
