@@ -38,16 +38,16 @@ int loginUser(FILE* f) //tra ve ti`nh trang log
 	temp_string[i-1] = '\0';
 	if (ord<0||checkpassUser(ord, temp_string, f) == 0)
 	{
-		printf("Tai khoan hoac mat khau khong dung !\n");
+		printf("\nTai khoan hoac mat khau khong dung !\n");
 		return 0;
 	}
 	readUser(u,ord, f);
 	if (u.status == 0)
 	{
-		printf("Tai khoan cua ban da bi khoa! Vui long dang nhap lai bang tai khoan khac! \n");
+		printf("\nTai khoan cua ban da bi khoa! Vui long dang nhap lai bang tai khoan khac! \n");
 		return 0;
 	}
-	printf("Dang nhap thanh cong ! \n");
+	printf("\nDang nhap thanh cong ! \n");
 	return u.type;
 
 }
@@ -86,7 +86,7 @@ int findUser(char* name,FILE* f) //tra ve number(STT), -1 la khong tim thay
 	rewind(f);
 	return -1;
 }
-int checkpassUser(int ord,char* pass, FILE* f) //chua xong
+int checkpassUser(int ord,char* pass, FILE* f) 
 {
 	if (f == NULL) {
 		printf(".csv not found! checkpassUser failed \n");
@@ -114,6 +114,7 @@ int checkpassUser(int ord,char* pass, FILE* f) //chua xong
 		return 0;
 	}
 }
+
 void readUser(User&u,int ord, FILE* f)
 {
 	if (f == NULL)
@@ -191,6 +192,7 @@ void writeUser(User& u, FILE*& f)
 	rename("temp.txt", fUSER);
 	f = fopen(fUSER, "r");
 }
+
 void updateUserInfo(FILE* &f) {
 	if (f == NULL)
 	{
@@ -201,6 +203,7 @@ void updateUserInfo(FILE* &f) {
 	
 	int choice;
 	do {
+		system("cls");
 		printf("Nhung thong tin co the duoc cap nhat\n");
 		printf("1. Ho ten        : %s\n",u.name);
 		printf("2. Ngay sinh     : %d/%d/%d\n",u.birth.d,u.birth.m,u.birth.y);
@@ -293,6 +296,7 @@ void updateUserInfo(FILE* &f) {
 	} while (choice != 0);
 	rewind(f);
 }
+
 void updateUser_pass(FILE* &f) { //con 1 ty bug
 	if (f == NULL)
 	{
@@ -327,10 +331,10 @@ void updateUser_pass(FILE* &f) { //con 1 ty bug
 	
 	while (_stricmp(temp_string,u.password)!=0)
 	{
-		printf("Sai mat khau!\n");
+		printf("\nSai mat khau!\n");
 		return;
 	}
-	printf("Nhap mat khau moi: ");
+	printf("\nNhap mat khau moi: ");
 	i = 0;
 	c = '.';
 	while (c != 13) {
@@ -354,10 +358,9 @@ void updateUser_pass(FILE* &f) { //con 1 ty bug
 	temp_string[i - 1] = '\0';
 	copyString_statictodynamic(temp_string, u.password);
 	writeUser(u,f);
-	printf("Da thay doi mat khau thanh cong!\n");
+	printf("\nDa thay doi mat khau thanh cong!\n");
 	rewind(f);
 } 
-//cho Kiet debug
 
 void giveUser_status(FILE* &f) {
 	if (f == NULL)
@@ -386,7 +389,6 @@ void giveUser_status(FILE* &f) {
 	writeUser(change, f);
 	rewind(f);
 } 
-// chua debug
 
 void createUser( FILE*& f) {
 	if (f == NULL)
@@ -407,13 +409,14 @@ void createUser( FILE*& f) {
 	for (int i = 1; i <= n; i++) {
 		readUser(u_temp, i, f);
 		if (_stricmp(u_temp.ID, u_add.ID) == 0) {
-			printf("Nguoi dung nay ton tai!\n");
+			printf("Nguoi dung  nay da ton tai!\n");
 			return;
 		}
 		fscanf(f, "%[^\n]\n", &temp_string);
 	}
-	printf("Nhap mat khau :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.password);
+	printf("Nhap mat khau: "); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.password);
 	printf("Nhap ho ten :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.name);
+	printf("Nhap ngay thang nam sinh:\n");
 	printf("Ngay: ");
 	scanf("%d", &u_add.birth.d);
 	printf("Thang: ");
@@ -421,10 +424,10 @@ void createUser( FILE*& f) {
 	printf("Nam: ");
 	scanf("%d", &u_add.birth.y);
 	cin.ignore();
-	printf("Nhap CMND :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.identify_numb);
-	printf("Nhap dia chi :"); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.address);
-	printf("Nhap gioi tinh ( 0- Nu / 1 - Nam) :"); scanf("%d", &u_add.sex); 
-	printf("Nguoi nay co phan quyen la :(1-chuyen vien /2- quan ly)"); scanf("%d", &u_add.type);
+	printf("Nhap CMND: "); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.identify_numb);
+	printf("Nhap dia chi: "); scanf("%[^\n]%*c", temp_string); copyString_statictodynamic(temp_string, u_add.address);
+	printf("Nhap gioi tinh ( 0- Nu / 1 - Nam): "); scanf("%d", &u_add.sex); 
+	printf("Nguoi nay co phan quyen la :(1-chuyen vien /2- quan ly) "); scanf("%d", &u_add.type);
 	u_add.status = 1;
 	u_add.ord_numb = n + 1;
 	writeUser(u_add, f);

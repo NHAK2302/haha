@@ -15,7 +15,7 @@ void func1() {
 	do {
 		system("cls");
 		printf("=======================================================================================================================\n");
-		printf("Chuc nang 1: ...\n");
+		printf("Chuc nang 1: Quan ly nguoi dung\n");
 		printf("=======================================================================================================================\n");
 		printf("1. Dang nhap\n");
 		printf("2. Dang xuat\n");
@@ -91,6 +91,7 @@ void func1() {
 					break;
 				}
 				else {
+					system("cls");
 					updateUser_pass(fUser);
 					system("pause");
 					break;
@@ -103,6 +104,7 @@ void func1() {
 					break;
 				}
 				else {
+					system("cls");
 					updateUserInfo(fUser);
 					system("pause");
 					break;
@@ -110,7 +112,7 @@ void func1() {
 			}
 			case 5: {
 				if (login == 3) {
-					//ham function 5
+					system("cls");
 					createUser(fUser);
 					system("pause");
 					break;
@@ -123,6 +125,7 @@ void func1() {
 			}
 			case 6: {
 				if (login == 3) {
+					system("cls");
 					giveUser_status(fUser); //goi ham phan quyen user
 					system("pause");
 					break;
@@ -642,15 +645,15 @@ void welcome() {
 	do {
 		system("cls");
 		printf("                                                   ***** Welcome! *****                         \n\n");
-		printf("|======================================================================================================================|\n");
-		printf("| Chuc nang 1: ...                                                                                                     |\n");
-		printf("| Chuc nang 2: Quan ly doc gia                                                                                         |\n");
-		printf("| Chuc nang 3: Quan ly sach                                                                                            |\n");
-		printf("| Chuc nang 4: Lap phieu muon sach                                                                                     |\n");
-		printf("| Chuc nang 5: Lap phieu tra sach                                                                                      |\n");
-		printf("| Chuc nang 6: Cac thong ke co ban                                                                                     |\n");
-		printf("| Chuc nang 0: Thoat chuong trinh                                                                                      |\n");
-		printf("|======================================================================================================================|\n");
+		printf("======================================================================================================================\n");
+		printf(" Chuc nang 1: Quan ly nguoi dung                                                                                      \n");
+		printf(" Chuc nang 2: Quan ly doc gia                                                                                         \n");
+		printf(" Chuc nang 3: Quan ly sach                                                                                            \n");
+		printf(" Chuc nang 4: Lap phieu muon sach                                                                                     \n");
+		printf(" Chuc nang 5: Lap phieu tra sach                                                                                      \n");
+		printf(" Chuc nang 6: Cac thong ke co ban                                                                                     \n");
+		printf(" Chuc nang 0: Thoat chuong trinh                                                                                      \n");
+		printf("======================================================================================================================\n");
 		if (login == 0)
 		{
 			printf("Tinh trang : Chua dang nhap\n");
